@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<VisualState xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ShowCheckBoxes="false">
+  <TopNode>[0-1000]C:\GLOBAL DATA\Projects\VS Projects\Incinerate\IncinerateTest\IncinerateTest.csproj</TopNode>
+  <SelectedNode>[0-1008]IncinerateTest.FileSaverTest.TestSave</SelectedNode>
+  <ExcludeCategories>false</ExcludeCategories>
+  <Nodes>
+    <Node UniqueName="[0-1000]C:\GLOBAL DATA\Projects\VS Projects\Incinerate\IncinerateTest\IncinerateTest.csproj" Expanded="true" />
+    <Node UniqueName="[0-1011]C:\GLOBAL DATA\Projects\VS Projects\Incinerate\IncinerateTest\bin\Release\IncinerateTest.dll" Expanded="true" />
+    <Node UniqueName="[0-1014]IncinerateTest" Expanded="true" />
+    <Node UniqueName="[0-1007]IncinerateTest.FileSaverTest" Expanded="true" />
+    <Node UniqueName="[0-1005]IncinerateTest.PotatoTest" Expanded="true" />
+    <Node UniqueName="[0-1009]IncinerateTest.QuadraticEquationTest" Expanded="true" />
+    <Node UniqueName="[0-1012]NeuroIncinerate" Expanded="true" />
+    <Node UniqueName="[0-1013]NeuroIncinerate.Neuro" Expanded="true" />
+    <Node UniqueName="[0-1001]NeuroIncinerate.Neuro.LimitedProcessHistoryTest" Expanded="true" />
+    <Node UniqueName="[0-1002]NeuroIncinerate.Neuro.LimitedProcessHistoryTest.TestCycle" Expanded="true" />
+  </Nodes>
+</VisualState>

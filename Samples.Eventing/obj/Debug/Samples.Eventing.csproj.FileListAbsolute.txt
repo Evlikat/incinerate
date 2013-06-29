@@ -1,0 +1,5 @@
+C:\Users\Roman Gauss\Desktop\EventTraceWatcher\Samples.Eventing\bin\Debug\Samples.Eventing.dll
+C:\Users\Roman Gauss\Desktop\EventTraceWatcher\Samples.Eventing\bin\Debug\Samples.Eventing.pdb
+C:\Users\Roman Gauss\Desktop\EventTraceWatcher\Samples.Eventing\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Roman Gauss\Desktop\EventTraceWatcher\Samples.Eventing\obj\Debug\Samples.Eventing.dll
+C:\Users\Roman Gauss\Desktop\EventTraceWatcher\Samples.Eventing\obj\Debug\Samples.Eventing.pdb

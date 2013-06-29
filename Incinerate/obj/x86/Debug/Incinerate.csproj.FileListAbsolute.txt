@@ -1,0 +1,42 @@
+C:\Users\Roman Gauss\AppData\Local\Temporary Projects\Incinerate\bin\Debug\Incinerate.exe
+C:\Users\Roman Gauss\AppData\Local\Temporary Projects\Incinerate\bin\Debug\Incinerate.pdb
+C:\Users\Roman Gauss\AppData\Local\Temporary Projects\Incinerate\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Roman Gauss\AppData\Local\Temporary Projects\Incinerate\obj\x86\Debug\Incinerate.MainForm.resources
+C:\Users\Roman Gauss\AppData\Local\Temporary Projects\Incinerate\obj\x86\Debug\Incinerate.Properties.Resources.resources
+C:\Users\Roman Gauss\AppData\Local\Temporary Projects\Incinerate\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Users\Roman Gauss\AppData\Local\Temporary Projects\Incinerate\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Users\Roman Gauss\AppData\Local\Temporary Projects\Incinerate\obj\x86\Debug\Incinerate.exe
+C:\Users\Roman Gauss\AppData\Local\Temporary Projects\Incinerate\obj\x86\Debug\Incinerate.pdb
+C:\GLOBAL DATA\Projects\VS Projects\Incinerate\Incinerate\obj\x86\Debug\Incinerate.exe
+C:\GLOBAL DATA\Projects\VS Projects\Incinerate\Incinerate\obj\x86\Debug\Incinerate.pdb
+C:\GLOBAL DATA\Projects\VS Projects\Incinerate\Incinerate\bin\Debug\Incinerate.exe
+C:\GLOBAL DATA\Projects\VS Projects\Incinerate\Incinerate\bin\Debug\Incinerate.pdb
+C:\GLOBAL DATA\Projects\VS Projects\Incinerate\Incinerate\obj\x86\Debug\Incinerate.MainForm.resources
+C:\GLOBAL DATA\Projects\VS Projects\Incinerate\Incinerate\obj\x86\Debug\Incinerate.Properties.Resources.resources
+C:\GLOBAL DATA\Projects\VS Projects\Incinerate\Incinerate\bin\Debug\TraceEvent.dll
+C:\GLOBAL DATA\Projects\VS Projects\Incinerate\Incinerate\bin\Debug\NeuroIncinerate.dll
+C:\GLOBAL DATA\Projects\VS Projects\Incinerate\Incinerate\bin\Debug\NeuroIncinerate.pdb
+C:\GLOBAL DATA\Projects\VS Projects\Incinerate\Incinerate\bin\Debug\AForge.Neuro.dll
+C:\GLOBAL DATA\Projects\VS Projects\Incinerate\Incinerate\bin\Debug\AForge.Genetic.dll
+C:\GLOBAL DATA\Projects\VS Projects\Incinerate\Incinerate\bin\Debug\AForge.dll
+C:\GLOBAL DATA\Projects\VS Projects\Incinerate\Incinerate\bin\Debug\AForge.Math.dll
+C:\GLOBAL DATA\Projects\VS Projects\Incinerate\Incinerate\bin\Debug\AForge.Neuro.xml
+C:\GLOBAL DATA\Projects\VS Projects\Incinerate\Incinerate\bin\Debug\AForge.Genetic.xml
+C:\GLOBAL DATA\Projects\VS Projects\Incinerate\Incinerate\bin\Debug\AForge.xml
+C:\GLOBAL DATA\Projects\VS Projects\Incinerate\Incinerate\bin\Debug\AForge.Math.xml
+C:\GLOBAL DATA\Projects\VS Projects\Incinerate\Incinerate\obj\x86\Debug\Incinerate.csproj.GenerateResource.Cache
+C:\GLOBAL DATA\Projects\VS Projects\Incinerate\Incinerate\obj\x86\Debug\Incinerate.csprojResolveAssemblyReference.cache
+C:\GLOBAL DATA\Projects\incinerate\Incinerate\bin\Debug\Incinerate.exe
+C:\GLOBAL DATA\Projects\incinerate\Incinerate\bin\Debug\Incinerate.pdb
+C:\GLOBAL DATA\Projects\incinerate\Incinerate\bin\Debug\NeuroIncinerate.dll
+C:\GLOBAL DATA\Projects\incinerate\Incinerate\bin\Debug\TraceEvent.dll
+C:\GLOBAL DATA\Projects\incinerate\Incinerate\bin\Debug\AForge.Neuro.dll
+C:\GLOBAL DATA\Projects\incinerate\Incinerate\bin\Debug\NeuroIncinerate.pdb
+C:\GLOBAL DATA\Projects\incinerate\Incinerate\bin\Debug\TraceEvent.pdb
+C:\GLOBAL DATA\Projects\incinerate\Incinerate\bin\Debug\TraceEvent.xml
+C:\GLOBAL DATA\Projects\incinerate\Incinerate\obj\x86\Debug\Incinerate.csprojResolveAssemblyReference.cache
+C:\GLOBAL DATA\Projects\incinerate\Incinerate\obj\x86\Debug\Incinerate.MainForm.resources
+C:\GLOBAL DATA\Projects\incinerate\Incinerate\obj\x86\Debug\Incinerate.Properties.Resources.resources
+C:\GLOBAL DATA\Projects\incinerate\Incinerate\obj\x86\Debug\Incinerate.csproj.GenerateResource.Cache
+C:\GLOBAL DATA\Projects\incinerate\Incinerate\obj\x86\Debug\Incinerate.exe
+C:\GLOBAL DATA\Projects\incinerate\Incinerate\obj\x86\Debug\Incinerate.pdb

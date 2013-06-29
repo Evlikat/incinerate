@@ -1,0 +1,5 @@
+C:\GLOBAL DATA\Projects\VS Projects\Incinerate\Samples.Eventing\bin\Release\Samples.Eventing.dll
+C:\GLOBAL DATA\Projects\VS Projects\Incinerate\Samples.Eventing\bin\Release\Samples.Eventing.pdb
+C:\GLOBAL DATA\Projects\VS Projects\Incinerate\Samples.Eventing\obj\Release\ResolveAssemblyReference.cache
+C:\GLOBAL DATA\Projects\VS Projects\Incinerate\Samples.Eventing\obj\Release\Samples.Eventing.dll
+C:\GLOBAL DATA\Projects\VS Projects\Incinerate\Samples.Eventing\obj\Release\Samples.Eventing.pdb

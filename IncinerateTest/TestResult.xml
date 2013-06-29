@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!--This file represents the results of running a test suite-->
+<test-results name="C:\GLOBAL DATA\Projects\VS Projects\Incinerate\IncinerateTest\IncinerateTest.csproj" total="1" errors="0" failures="0" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2012-05-22" time="16:24:50">
+  <environment nunit-version="2.6.0.12051" clr-version="2.0.50727.4927" os-version="Microsoft Windows NT 6.1.7600.0" platform="Win32NT" cwd="C:\GLOBAL DATA\Projects\VS Projects\Incinerate\IncinerateTest" machine-name="SANCHOPANSA" user="Roman Gauss" user-domain="SanchoPansa" />
+  <culture-info current-culture="ru-RU" current-uiculture="ru-RU" />
+  <test-suite type="Project" name="C:\GLOBAL DATA\Projects\VS Projects\Incinerate\IncinerateTest\IncinerateTest.csproj" executed="True" result="Success" success="True" time="6.359" asserts="0">
+    <results>
+      <test-suite type="Assembly" name="C:\GLOBAL DATA\Projects\VS Projects\Incinerate\IncinerateTest\bin\Release\IncinerateTest.dll" executed="True" result="Success" success="True" time="6.344" asserts="0">
+        <results>
+          <test-suite type="Namespace" name="IncinerateTest" executed="True" result="Success" success="True" time="6.344" asserts="0">
+            <results>
+              <test-suite type="TestFixture" name="FileSaverTest" executed="True" result="Success" success="True" time="6.344" asserts="0">
+                <results>
+                  <test-case name="IncinerateTest.FileSaverTest.TestSave" executed="True" result="Success" success="True" time="6.328" asserts="0" />
+                </results>
+              </test-suite>
+            </results>
+          </test-suite>
+        </results>
+      </test-suite>
+    </results>
+  </test-suite>
+</test-results>

@@ -1,0 +1,10 @@
+C:\GLOBAL DATA\Projects\VS Projects\Incinerate\TraceEvent\bin\Debug\TraceEvent.dll
+C:\GLOBAL DATA\Projects\VS Projects\Incinerate\TraceEvent\bin\Debug\TraceEvent.pdb
+C:\GLOBAL DATA\Projects\VS Projects\Incinerate\TraceEvent\obj\Debug\TraceEvent.dll
+C:\GLOBAL DATA\Projects\VS Projects\Incinerate\TraceEvent\obj\Debug\TraceEvent.pdb
+C:\GLOBAL DATA\Projects\VS Projects\Incinerate\TraceEvent\obj\Debug\TraceEvent.csprojResolveAssemblyReference.cache
+C:\GLOBAL DATA\Projects\incinerate\TraceEvent\bin\Debug\TraceEvent.dll
+C:\GLOBAL DATA\Projects\incinerate\TraceEvent\bin\Debug\TraceEvent.pdb
+C:\GLOBAL DATA\Projects\incinerate\TraceEvent\obj\Debug\TraceEvent.csprojResolveAssemblyReference.cache
+C:\GLOBAL DATA\Projects\incinerate\TraceEvent\obj\Debug\TraceEvent.dll
+C:\GLOBAL DATA\Projects\incinerate\TraceEvent\obj\Debug\TraceEvent.pdb
