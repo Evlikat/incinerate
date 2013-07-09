@@ -18,3 +18,17 @@ C:\GLOBAL DATA\Projects\VS Projects\Incinerate\IncinerateCmd\bin\Debug\incicmd.e
 C:\GLOBAL DATA\Projects\VS Projects\Incinerate\IncinerateCmd\bin\Debug\incicmd.pdb
 C:\GLOBAL DATA\Projects\VS Projects\Incinerate\IncinerateCmd\obj\x86\Debug\incicmd.exe
 C:\GLOBAL DATA\Projects\VS Projects\Incinerate\IncinerateCmd\obj\x86\Debug\incicmd.pdb
+C:\GLOBAL DATA\Projects\incinerate\IncinerateCmd\bin\Debug\incicmd.exe
+C:\GLOBAL DATA\Projects\incinerate\IncinerateCmd\bin\Debug\incicmd.pdb
+C:\GLOBAL DATA\Projects\incinerate\IncinerateCmd\bin\Debug\IncinerateService.exe
+C:\GLOBAL DATA\Projects\incinerate\IncinerateCmd\bin\Debug\NeuroIncinerate.dll
+C:\GLOBAL DATA\Projects\incinerate\IncinerateCmd\bin\Debug\TraceEvent.dll
+C:\GLOBAL DATA\Projects\incinerate\IncinerateCmd\bin\Debug\AForge.Neuro.dll
+C:\GLOBAL DATA\Projects\incinerate\IncinerateCmd\bin\Debug\IncinerateService.pdb
+C:\GLOBAL DATA\Projects\incinerate\IncinerateCmd\bin\Debug\NeuroIncinerate.pdb
+C:\GLOBAL DATA\Projects\incinerate\IncinerateCmd\bin\Debug\TraceEvent.pdb
+C:\GLOBAL DATA\Projects\incinerate\IncinerateCmd\bin\Debug\TraceEvent.xml
+C:\GLOBAL DATA\Projects\incinerate\IncinerateCmd\obj\x86\Debug\IncinerateCmd.csprojResolveAssemblyReference.cache
+C:\GLOBAL DATA\Projects\incinerate\IncinerateCmd\obj\x86\Debug\incicmd.exe
+C:\GLOBAL DATA\Projects\incinerate\IncinerateCmd\obj\x86\Debug\incicmd.pdb
+C:\GLOBAL DATA\Projects\incinerate\IncinerateCmd\bin\Debug\AForge.dll

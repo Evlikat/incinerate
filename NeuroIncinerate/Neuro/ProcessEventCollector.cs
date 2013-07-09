@@ -58,8 +58,8 @@ namespace NeuroIncinerate.Neuro
 
         public void Stop()
         {
-            Running = false; 
-            m_TraceEventSource.Close();
+            Running = false;
+            if (m_TraceEventSource != null) { m_TraceEventSource.Close(); }
         }
 
         public void AttachToProcessing()

@@ -14,3 +14,14 @@ C:\GLOBAL DATA\Projects\VS Projects\Incinerate\NeuroApplication\bin\Debug\AForge
 C:\GLOBAL DATA\Projects\VS Projects\Incinerate\NeuroApplication\obj\x86\Debug\NeuroApplication.exe
 C:\GLOBAL DATA\Projects\VS Projects\Incinerate\NeuroApplication\obj\x86\Debug\NeuroApplication.pdb
 C:\GLOBAL DATA\Projects\VS Projects\Incinerate\NeuroApplication\obj\x86\Debug\NeuroApplication.csprojResolveAssemblyReference.cache
+C:\GLOBAL DATA\Projects\incinerate\NeuroApplication\bin\Debug\NeuroApplication.exe
+C:\GLOBAL DATA\Projects\incinerate\NeuroApplication\bin\Debug\NeuroApplication.pdb
+C:\GLOBAL DATA\Projects\incinerate\NeuroApplication\bin\Debug\NeuroIncinerate.dll
+C:\GLOBAL DATA\Projects\incinerate\NeuroApplication\bin\Debug\TraceEvent.dll
+C:\GLOBAL DATA\Projects\incinerate\NeuroApplication\bin\Debug\AForge.Neuro.dll
+C:\GLOBAL DATA\Projects\incinerate\NeuroApplication\bin\Debug\NeuroIncinerate.pdb
+C:\GLOBAL DATA\Projects\incinerate\NeuroApplication\bin\Debug\TraceEvent.pdb
+C:\GLOBAL DATA\Projects\incinerate\NeuroApplication\bin\Debug\TraceEvent.xml
+C:\GLOBAL DATA\Projects\incinerate\NeuroApplication\obj\x86\Debug\NeuroApplication.csprojResolveAssemblyReference.cache
+C:\GLOBAL DATA\Projects\incinerate\NeuroApplication\obj\x86\Debug\NeuroApplication.exe
+C:\GLOBAL DATA\Projects\incinerate\NeuroApplication\obj\x86\Debug\NeuroApplication.pdb

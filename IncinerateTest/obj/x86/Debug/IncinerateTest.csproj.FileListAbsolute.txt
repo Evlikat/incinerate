@@ -20,3 +20,16 @@ C:\GLOBAL DATA\Projects\VS Projects\Incinerate\IncinerateTest\bin\Release\AForge
 C:\GLOBAL DATA\Projects\VS Projects\Incinerate\IncinerateTest\bin\Release\AForge.xml
 C:\GLOBAL DATA\Projects\VS Projects\Incinerate\IncinerateTest\bin\Release\AForge.Math.xml
 C:\GLOBAL DATA\Projects\VS Projects\Incinerate\IncinerateTest\obj\x86\Debug\IncinerateTest.csprojResolveAssemblyReference.cache
+C:\GLOBAL DATA\Projects\incinerate\IncinerateTest\bin\Release\IncinerateTest.dll
+C:\GLOBAL DATA\Projects\incinerate\IncinerateTest\bin\Release\IncinerateTest.pdb
+C:\GLOBAL DATA\Projects\incinerate\IncinerateTest\bin\Release\AForge.Neuro.dll
+C:\GLOBAL DATA\Projects\incinerate\IncinerateTest\bin\Release\NeuroIncinerate.dll
+C:\GLOBAL DATA\Projects\incinerate\IncinerateTest\bin\Release\nunit.framework.dll
+C:\GLOBAL DATA\Projects\incinerate\IncinerateTest\bin\Release\TraceEvent.dll
+C:\GLOBAL DATA\Projects\incinerate\IncinerateTest\bin\Release\NeuroIncinerate.pdb
+C:\GLOBAL DATA\Projects\incinerate\IncinerateTest\bin\Release\nunit.framework.xml
+C:\GLOBAL DATA\Projects\incinerate\IncinerateTest\bin\Release\TraceEvent.pdb
+C:\GLOBAL DATA\Projects\incinerate\IncinerateTest\bin\Release\TraceEvent.xml
+C:\GLOBAL DATA\Projects\incinerate\IncinerateTest\obj\x86\Debug\IncinerateTest.csprojResolveAssemblyReference.cache
+C:\GLOBAL DATA\Projects\incinerate\IncinerateTest\obj\x86\Debug\IncinerateTest.dll
+C:\GLOBAL DATA\Projects\incinerate\IncinerateTest\obj\x86\Debug\IncinerateTest.pdb

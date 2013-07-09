@@ -39,7 +39,6 @@
   <ItemGroup>
     <Compile Include="FileSaverTest.cs" />
     <Compile Include="LimitedProcessHistoryTest.cs" />
-    <Compile Include="PotatoTest.cs" />
     <Compile Include="QuadraticEquationTest.cs" />
   </ItemGroup>
   <ItemGroup>

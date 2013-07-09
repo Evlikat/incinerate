@@ -12,3 +12,12 @@ C:\GLOBAL DATA\Projects\VS Projects\Incinerate\NeuroIncinerate\bin\Release\AForg
 C:\GLOBAL DATA\Projects\VS Projects\Incinerate\NeuroIncinerate\obj\Release\NeuroIncinerate.dll
 C:\GLOBAL DATA\Projects\VS Projects\Incinerate\NeuroIncinerate\obj\Release\NeuroIncinerate.pdb
 C:\GLOBAL DATA\Projects\VS Projects\Incinerate\NeuroIncinerate\obj\Release\NeuroIncinerate.csprojResolveAssemblyReference.cache
+C:\GLOBAL DATA\Projects\incinerate\NeuroIncinerate\bin\Release\NeuroIncinerate.dll
+C:\GLOBAL DATA\Projects\incinerate\NeuroIncinerate\bin\Release\NeuroIncinerate.pdb
+C:\GLOBAL DATA\Projects\incinerate\NeuroIncinerate\bin\Release\AForge.Neuro.dll
+C:\GLOBAL DATA\Projects\incinerate\NeuroIncinerate\bin\Release\TraceEvent.dll
+C:\GLOBAL DATA\Projects\incinerate\NeuroIncinerate\bin\Release\TraceEvent.pdb
+C:\GLOBAL DATA\Projects\incinerate\NeuroIncinerate\bin\Release\TraceEvent.xml
+C:\GLOBAL DATA\Projects\incinerate\NeuroIncinerate\obj\Release\NeuroIncinerate.csprojResolveAssemblyReference.cache
+C:\GLOBAL DATA\Projects\incinerate\NeuroIncinerate\obj\Release\NeuroIncinerate.dll
+C:\GLOBAL DATA\Projects\incinerate\NeuroIncinerate\obj\Release\NeuroIncinerate.pdb

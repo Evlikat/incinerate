@@ -18,8 +18,6 @@ C:\GLOBAL DATA\Projects\VS Projects\Incinerate\IncinerateService\bin\Debug\AForg
 C:\GLOBAL DATA\Projects\VS Projects\Incinerate\IncinerateService\bin\Debug\AForge.xml
 C:\GLOBAL DATA\Projects\VS Projects\Incinerate\IncinerateService\bin\Debug\AForge.Math.xml
 C:\GLOBAL DATA\Projects\VS Projects\Incinerate\IncinerateService\obj\x86\Debug\IncinerateService.csprojResolveAssemblyReference.cache
-C:\GLOBAL DATA\Projects\incinerate\IncinerateService\obj\x86\Debug\IncinerateService.exe
-C:\GLOBAL DATA\Projects\incinerate\IncinerateService\obj\x86\Debug\IncinerateService.pdb
 C:\GLOBAL DATA\Projects\incinerate\IncinerateService\bin\Debug\IncinerateService.exe
 C:\GLOBAL DATA\Projects\incinerate\IncinerateService\bin\Debug\IncinerateService.pdb
 C:\GLOBAL DATA\Projects\incinerate\IncinerateService\bin\Debug\NeuroIncinerate.dll
@@ -31,3 +29,6 @@ C:\GLOBAL DATA\Projects\incinerate\IncinerateService\bin\Debug\TraceEvent.xml
 C:\GLOBAL DATA\Projects\incinerate\IncinerateService\obj\x86\Debug\IncinerateService.csprojResolveAssemblyReference.cache
 C:\GLOBAL DATA\Projects\incinerate\IncinerateService\obj\x86\Debug\IncinerateService.IncinerateServiceInstaller.resources
 C:\GLOBAL DATA\Projects\incinerate\IncinerateService\obj\x86\Debug\IncinerateService.csproj.GenerateResource.Cache
+C:\GLOBAL DATA\Projects\incinerate\IncinerateService\obj\x86\Debug\IncinerateService.exe
+C:\GLOBAL DATA\Projects\incinerate\IncinerateService\obj\x86\Debug\IncinerateService.pdb
+C:\GLOBAL DATA\Projects\incinerate\IncinerateService\bin\Debug\AForge.dll
