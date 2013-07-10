@@ -230,10 +230,31 @@ class WatchingState : State
             return;
         }
         m_AgentRegistry.AddWatcher(agent);
+        m_Collector.ActionOccurred += new Action<TraceEvent>(m_Collector_ActionOccurred);
+        m_History.SnapshotReady += new EventHandler<SnapshotReadyEventArgs>(m_History_SnapshotReady);
+        m_Collector.Start();
+        Thread thread = new Thread(new ThreadStart(AttachToProcessing));
+        thread.Start();
     }
 
     public override void Disable()
     {
+        m_Collector.Stop();
         m_AgentRegistry.StopWatch();
+    }
+
+    void m_History_SnapshotReady(object sender, SnapshotReadyEventArgs e)
+    {
+        m_AgentRegistry.Handle(e.PID, e.Events);
+    }
+
+    void m_Collector_ActionOccurred(TraceEvent obj)
+    {
+        m_History.Add(new WinPID(obj.ProcessID, obj.ProcessName), new ProcessAction(obj));
+    }
+
+    private void AttachToProcessing()
+    {
+        m_Collector.AttachToProcessing();
     }
 }

@@ -10,6 +10,8 @@ namespace IncinerateService.Core
     {
         public const int MinPositive = 500;
         public const int MinNegative = 2500;
+        public const double P1 = 0.17;
+        public const double P2 = 0.5;
 
         ILearningAgentPool m_LearningAgents = new MultiLearningAgentPool();
         Agent m_WatchingAgent;
@@ -20,7 +22,18 @@ namespace IncinerateService.Core
             
             if (m_WatchingAgent != null)
             {
-                m_WatchingAgent.Compute(snapshot);
+                double result = m_WatchingAgent.Compute(snapshot);
+                if (result > P1)
+                {
+                    if (result > P2)
+                    {
+                        Console.WriteLine("[HARD] найден похожий процесс {0}", iPID.PID);
+                    }
+                    else
+                    {
+                        Console.WriteLine("[SOFT] найден схожий процесс {0}", iPID.PID);
+                    }
+                }
             }
 
             return m_LearningAgents.TrainAll(iPID, snapshot);
