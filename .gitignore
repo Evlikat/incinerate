@@ -1,0 +1,16 @@
+GooglePinger/bin/*
+GooglePinger/obj/*
+Incinerate/bin/*
+Incinerate/obj/*
+IncinerateCmd/bin/*
+IncinerateCmd/obj/*
+IncinerateService/bin/*
+IncinerateService/obj/*
+NeuroApplication/bin/*
+NeuroApplication/obj/*
+NeuroIncinerate/bin/*
+NeuroIncinerate/obj/*
+Samples.Eventing/bin/*
+Samples.Eventing/obj/*
+TraceEvent/bin/*
+TraceEvent/obj/*
