@@ -8,6 +8,20 @@ namespace NeuroIncinerate.Neuro
     [Serializable]
     public class HistorySnapshot
     {
+        public string LegacyProcessName
+        {
+            get
+            {
+                if (String.IsNullOrEmpty(ProcessName))
+                {
+                    return PID.Name;
+                }
+                return ProcessName;
+            }
+        }
+
+        public string ProcessName { private get; set; }
+
         public HistorySnapshot()
         {
         }
@@ -40,7 +54,9 @@ namespace NeuroIncinerate.Neuro
             {
                 list.Add(Events[i]);
             }
-            return new HistorySnapshot(PID, list);
+            HistorySnapshot hs = new HistorySnapshot(PID, list);
+            hs.ProcessName = this.ProcessName;
+            return hs;
         }
 
         public static IEnumerable<HistorySnapshot> Divide(int snapshotLength, HistorySnapshot sourceSnapshot)

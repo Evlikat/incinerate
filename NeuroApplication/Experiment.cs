@@ -41,6 +41,7 @@ namespace NeuroApplication
             MultiActivationNetwork multiNetwork = new MultiActivationNetwork(TargetProcessName);
 
             IList<HistorySnapshot> snapshots = LoadSnapshots(SourceSnapshots);
+            snapshots = Shuffle(snapshots);
             LoadingFinished(this, new EventArgs());
 
             LearningSet learningSet = new LearningSet(snapshots, TargetProcessName);
@@ -56,9 +57,10 @@ namespace NeuroApplication
         {
             int i = 0;
             TrainingStarted(this, new EventArgs());
+            learningSet = Shuffle(learningSet);
             foreach (HistorySnapshot snapshot in learningSet)
             {
-                bool isTargetProcess = snapshot.PID.Name.Contains(multiNetwork.TargetProcessName);
+                bool isTargetProcess = snapshot.LegacyProcessName.Contains(multiNetwork.TargetProcessName);
                 multiNetwork.RunTrain(snapshot, isTargetProcess);
                 Trained(this, new ProgressEventArgs(++i, learningSet.Count));
             }
@@ -74,7 +76,7 @@ namespace NeuroApplication
             INetworkTrustRegistry trustRegistry = new NetworkTrustVector();
             foreach (HistorySnapshot snapshot in checkingSet)
             {
-                bool expectedYes = snapshot.PID.Name.Contains(TargetProcessName);
+                bool expectedYes = snapshot.LegacyProcessName.Contains(TargetProcessName);
                 IMultiNetworkComputationResult result = multiNetwork.Compute(snapshot);
                 ResultObtained(this, new ProgressEventArgs(++i, checkingSet.Count));
                 trustRegistry.ApplyTrustLevel(result.Results, expectedYes ? 0 : 1);
@@ -97,13 +99,18 @@ namespace NeuroApplication
                     ++i;
                     if (i == Limit)
                     {
-                        SnapshotLoaded(this, new ProgressEventArgs(i, Limit));
+                        SnapshotLoaded(this, new ProgressEventArgs(i, sourceSnapshot.Events.Count));
                         return snapshots;
                     }
                 }
-                SnapshotLoaded(this, new ProgressEventArgs(i, Limit));
+                SnapshotLoaded(this, new ProgressEventArgs(i, sourceSnapshot.Events.Count));
             }
             return snapshots;
+        }
+
+        private IList<HistorySnapshot> Shuffle(IList<HistorySnapshot> snapshots)
+        {
+            return new List<HistorySnapshot>(snapshots.OrderBy(a => Guid.NewGuid()));
         }
     }
 }

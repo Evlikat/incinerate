@@ -1,0 +1,5 @@
+C:\GLOBAL DATA\Projects\incinerate\GooglePinger\bin\Debug\GooglePinger.exe
+C:\GLOBAL DATA\Projects\incinerate\GooglePinger\bin\Debug\GooglePinger.pdb
+C:\GLOBAL DATA\Projects\incinerate\GooglePinger\obj\x86\Debug\GooglePinger.exe
+C:\GLOBAL DATA\Projects\incinerate\GooglePinger\obj\x86\Debug\GooglePinger.pdb
+C:\GLOBAL DATA\Projects\incinerate\GooglePinger\obj\x86\Debug\GooglePinger.csprojResolveAssemblyReference.cache

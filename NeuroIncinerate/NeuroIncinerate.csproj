@@ -48,6 +48,7 @@
     <Compile Include="Base\LearningPair.cs" />
     <Compile Include="Base\ProcessHistoryCollector.cs" />
     <Compile Include="ILearningPair.cs" />
+    <Compile Include="IntPID.cs" />
     <Compile Include="IPID.cs" />
     <Compile Include="Neuro\EventName.cs" />
     <Compile Include="Neuro\GlobalHistory.cs" />

@@ -25,3 +25,4 @@ C:\GLOBAL DATA\Projects\incinerate\NeuroApplication\bin\Debug\TraceEvent.xml
 C:\GLOBAL DATA\Projects\incinerate\NeuroApplication\obj\x86\Debug\NeuroApplication.csprojResolveAssemblyReference.cache
 C:\GLOBAL DATA\Projects\incinerate\NeuroApplication\obj\x86\Debug\NeuroApplication.exe
 C:\GLOBAL DATA\Projects\incinerate\NeuroApplication\obj\x86\Debug\NeuroApplication.pdb
+C:\GLOBAL DATA\Projects\incinerate\NeuroApplication\bin\Debug\AForge.dll

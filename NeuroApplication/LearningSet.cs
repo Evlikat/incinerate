@@ -26,7 +26,7 @@ namespace NeuroApplication
             Testing = new List<HistorySnapshot>();
             foreach (HistorySnapshot snapshot in Snapshots)
             {
-                if (snapshot.PID.Name.Contains(targetProcessName))
+                if (snapshot.LegacyProcessName.Contains(targetProcessName))
                 {
                     Target.Add(snapshot);
                 }

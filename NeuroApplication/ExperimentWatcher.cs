@@ -42,16 +42,42 @@ namespace NeuroApplication
         {
             foreach (ComputationFinishedEventArgs e in m_Results)
             {
-                int successCount = 0;
+                int successYes = 0;
+                int successNo = 0;
+                int wrongYes = 0;
+                int wrongNo = 0;
                 int total = 0;
                 foreach (KeyValuePair<IMultiNetworkComputationResult, bool> resultPair in e.Results)
                 {
-                    if (WasSuccessed(resultPair.Key, resultPair.Value))
-                        successCount++;
+                    if (resultPair.Value)
+                    {
+                        if (WasSuccessed(resultPair.Key, resultPair.Value))
+                        {
+                            successYes++;
+                        }
+                        else
+                        {
+                            wrongNo++;
+                        }
+                    }
+                    else
+                    {
+                        if (WasSuccessed(resultPair.Key, resultPair.Value))
+                        {
+                            successNo++;
+                        }
+                        else
+                        {
+                            wrongYes++;
+                        }
+                    }
 
                     total++;
                 }
-                Writer.WriteLine("Successes: {0} of {1}: {2:0.00}%", successCount, total, (double)successCount / total * 100);
+                int successCount = successNo + successYes;
+                Writer.WriteLine("Successes: {0} ({5}/{6}) of {1}: {2:0.00}%. Wrong 'No': {3}. Wrong 'Yes': {4}",
+                    successCount, total, (double)successCount / total * 100,
+                    wrongNo, wrongYes, successNo, successYes);
             }
         }
 
@@ -110,7 +136,7 @@ namespace NeuroApplication
 
         public static bool WasSuccessed(IMultiNetworkComputationResult result, bool expectedYes)
         {
-            return (result.Result[0] > result.Result[1]) ^ !expectedYes;
+            return (result.Result[0] - result.Result[1] > 0.1) ^ !expectedYes;
         }
     }
 }

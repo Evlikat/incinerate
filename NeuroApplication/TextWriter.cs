@@ -23,7 +23,7 @@ namespace NeuroApplication
         public void WriteAt(string value, int left, int top)
         {
             Console.SetCursorPosition(left, top);
-            Console.Write("                                                    ");
+            Console.Write("                                                                                 ");
             Console.SetCursorPosition(left, top);
             Console.Write(value);
         }

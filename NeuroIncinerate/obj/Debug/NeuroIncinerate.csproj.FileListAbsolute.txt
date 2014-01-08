@@ -20,3 +20,4 @@ C:\GLOBAL DATA\Projects\incinerate\NeuroIncinerate\bin\Debug\TraceEvent.xml
 C:\GLOBAL DATA\Projects\incinerate\NeuroIncinerate\obj\Debug\NeuroIncinerate.csprojResolveAssemblyReference.cache
 C:\GLOBAL DATA\Projects\incinerate\NeuroIncinerate\obj\Debug\NeuroIncinerate.dll
 C:\GLOBAL DATA\Projects\incinerate\NeuroIncinerate\obj\Debug\NeuroIncinerate.pdb
+C:\GLOBAL DATA\Projects\incinerate\NeuroIncinerate\bin\Debug\AForge.dll

@@ -9,37 +9,32 @@ namespace NeuroApplication.Experiments
 {
     class DifferentProcessesExperiment : ExperimentSample
     {
+        string source;
+        string results;
+
+        public DifferentProcessesExperiment(string source, string results)
+        {
+            this.source = source;
+            this.results = results;
+        }
+
         public override void Run()
         {
             ConsoleWriter writer = new ConsoleWriter();
-            ResultPrinter resultPrinter = new ResultPrinter(new StreamWriter(@"c:\results.txt"), writer);
-            SnapshotLoader loader = new SnapshotLoader(@"c:\etl");
+            ResultPrinter resultPrinter = new ResultPrinter(new StreamWriter(results), writer);
+            SnapshotLoader loader = new SnapshotLoader(source);
             IList<HistorySnapshot> snapshots = loader.LoadSnapshots();
             ISet<string> names = ProcessNamesExtractor.GetProcessNames(snapshots);
 
             foreach (string name in names)
             {
                 //Console.WriteLine(name);
-                ExperimentWatcher experiment = new ExperimentWatcher(writer, 5, name, snapshots);
+                ExperimentWatcher experiment = new ExperimentWatcher(writer, 10, name, snapshots);
                 experiment.Start();
                 resultPrinter.Prefix = name + ": ";
                 resultPrinter.PrintResult(experiment.Results);
             }
             resultPrinter.Close();
-            Console.In.Peek();
-        }
-    }
-
-    class ProcessNamesExtractor
-    {
-        public static ISet<string> GetProcessNames(IList<HistorySnapshot> snapshots)
-        {
-            ISet<string> names = new HashSet<string>();
-            foreach (HistorySnapshot snapshot in snapshots)
-            {
-                names.Add(snapshot.PID.Name);
-            }
-            return names;
         }
     }
 }

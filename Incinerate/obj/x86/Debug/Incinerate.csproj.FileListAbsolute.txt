@@ -40,3 +40,4 @@ C:\GLOBAL DATA\Projects\incinerate\Incinerate\obj\x86\Debug\Incinerate.Propertie
 C:\GLOBAL DATA\Projects\incinerate\Incinerate\obj\x86\Debug\Incinerate.csproj.GenerateResource.Cache
 C:\GLOBAL DATA\Projects\incinerate\Incinerate\obj\x86\Debug\Incinerate.exe
 C:\GLOBAL DATA\Projects\incinerate\Incinerate\obj\x86\Debug\Incinerate.pdb
+C:\GLOBAL DATA\Projects\incinerate\Incinerate\bin\Debug\AForge.dll
