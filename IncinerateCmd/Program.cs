@@ -45,9 +45,13 @@ namespace IncinerateCmd
                         }
                         customersProxy.AddLearningAgent(pids, cmdArgs.AgentName);
                     }
-                    else if (cmdArgs.Watched != null)
+                    else if (cmdArgs.Watched != null && cmdArgs.StrategyRed != null && cmdArgs.StrategyYellow != null)
                     {
-                        customersProxy.Watch(cmdArgs.Watched);
+                        customersProxy.Watch(cmdArgs.Watched, cmdArgs.StrategyRed, cmdArgs.StrategyYellow);
+                    }
+                    else if (cmdArgs.Stop != null)
+                    {
+                        customersProxy.Stop();
                     }
                     else
                     {
@@ -86,5 +90,14 @@ namespace IncinerateCmd
 
         [Option(Short = "a", Description = "Start to learn specified process behaviour")]
         public string AgentName = null;
+
+        [Option(Short = "sr", Description = "Selects a strategy for red line reaching")]
+        public string StrategyRed = null;
+
+        [Option(Short = "sy", Description = "Selects a strategy for yellow line reaching")]
+        public string StrategyYellow = null;
+
+        [Option(Short = "q", Description = "Stops any activity in service")]
+        public bool Stop = false;
     }
 }

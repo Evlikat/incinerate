@@ -67,6 +67,7 @@
     <Compile Include="Core\MultiLearningAgentPool.cs" />
     <Compile Include="Core\MainService.cs" />
     <Compile Include="Core\NullPool.cs" />
+    <Compile Include="Core\Strategy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service.cs">
       <SubType>Component</SubType>

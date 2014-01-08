@@ -15,6 +15,8 @@ namespace IncinerateService.Core
 
         ILearningAgentPool m_LearningAgents = new MultiLearningAgentPool();
         Agent m_WatchingAgent;
+        IStrategy m_RedStrategy;
+        IStrategy m_YellowStrategy;
 
         public ICollection<Agent> Handle(IPID iPID, IList<IProcessAction> actions)
         {
@@ -27,11 +29,11 @@ namespace IncinerateService.Core
                 {
                     if (result > P2)
                     {
-                        Console.WriteLine("[HARD] найден похожий процесс {0}", iPID.PID);
+                        m_RedStrategy.Apply(iPID.PID);
                     }
                     else
                     {
-                        Console.WriteLine("[SOFT] найден схожий процесс {0}", iPID.PID);
+                        m_YellowStrategy.Apply(iPID.PID);
                     }
                 }
             }
@@ -64,9 +66,11 @@ namespace IncinerateService.Core
             return m_LearningAgents.GetAll();
         }
 
-        public void AddWatcher(Agent agent)
+        public void AddWatcher(Agent agent, IStrategy redStrategy, IStrategy yellowStrategy)
         {
             m_WatchingAgent = agent;
+            m_RedStrategy = redStrategy;
+            m_YellowStrategy = yellowStrategy;
         }
 
         public void StopWatch()
