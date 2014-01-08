@@ -1,4 +1,0 @@
-C:\GLOBAL DATA\Projects\incinerate\GooglePinger\bin\Release\GooglePinger.exe
-C:\GLOBAL DATA\Projects\incinerate\GooglePinger\bin\Release\GooglePinger.pdb
-C:\GLOBAL DATA\Projects\incinerate\GooglePinger\obj\x86\Release\GooglePinger.exe
-C:\GLOBAL DATA\Projects\incinerate\GooglePinger\obj\x86\Release\GooglePinger.pdb
