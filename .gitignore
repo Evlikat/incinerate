@@ -4,6 +4,8 @@ Incinerate/bin/*
 Incinerate/obj/*
 IncinerateCmd/bin/*
 IncinerateCmd/obj/*
+IncinerateUI/bin/*
+IncinerateUI/obj/*
 IncinerateService/bin/*
 IncinerateService/obj/*
 NeuroApplication/bin/*
