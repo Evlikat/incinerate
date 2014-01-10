@@ -62,12 +62,14 @@
     <Compile Include="Core\IAgentStorage.cs" />
     <Compile Include="Core\ILearningAgentPool.cs" />
     <Compile Include="Core\IProcessStrategy.cs" />
+    <Compile Include="Core\IWatchingAgentsPool.cs" />
     <Compile Include="Core\LearningAgent.cs" />
     <Compile Include="Core\LearningConfig.cs" />
     <Compile Include="Core\MultiLearningAgentPool.cs" />
     <Compile Include="Core\MainService.cs" />
     <Compile Include="Core\NullPool.cs" />
     <Compile Include="Core\Strategy.cs" />
+    <Compile Include="Core\WatchingAgentPool.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service.cs">
       <SubType>Component</SubType>

@@ -8,20 +8,20 @@ namespace IncinerateService.Core
 {
     interface IStrategy
     {
-        void Apply(int pid);
+        void Apply(double res, int pid);
     }
 
     class DoNothingStrategy : IStrategy
     {
-        public void Apply(int pid) { }
+        public void Apply(double res, int pid) { }
     }
 
     class AlertStrategy : IStrategy
     {
 
-        public void Apply(int pid)
+        public void Apply(double res, int pid)
         {
-            Console.WriteLine("Обнаружен запрещенный процесс: {0}", pid);
+            Console.WriteLine("Обнаружен запрещенный процесс: {0} [{1:0.000000}]", pid, res);
         }
     }
 
@@ -39,10 +39,10 @@ namespace IncinerateService.Core
             m_MaxHits = max;
         }
 
-        public void Apply(int pid)
+        public void Apply(double res, int pid)
         {
             hits++;
-            Console.WriteLine("Обнаружен запрещенный процесс {0}. hits: {1}", pid, hits);
+            Console.WriteLine("Обнаружен запрещенный процесс {0} [{1:0.000000}]. hits: {2s}", pid, res, hits);
             if (hits >= m_MaxHits)
             {
                 Console.WriteLine("Завершение процесса {0}...", pid);

@@ -14,30 +14,15 @@ namespace IncinerateService.Core
         public const double P2 = 0.5;
 
         ILearningAgentPool m_LearningAgents = new MultiLearningAgentPool();
-        Agent m_WatchingAgent;
-        IStrategy m_RedStrategy;
-        IStrategy m_YellowStrategy;
+        IWatchingAgentsPool m_WatchingAgents = new WatchingAgentPool();
 
         public ICollection<Agent> Handle(IPID iPID, IList<IProcessAction> actions)
         {
             HistorySnapshot snapshot = new HistorySnapshot(iPID, actions);
-            
-            if (m_WatchingAgent != null)
-            {
-                double result = m_WatchingAgent.Compute(snapshot);
-                if (result > P1)
-                {
-                    if (result > P2)
-                    {
-                        m_RedStrategy.Apply(iPID.PID);
-                    }
-                    else
-                    {
-                        m_YellowStrategy.Apply(iPID.PID);
-                    }
-                }
-            }
 
+            IRecognizedAgent recognized = m_WatchingAgents.Compute(snapshot);
+            recognized.Apply(iPID.PID);
+            
             return m_LearningAgents.TrainAll(iPID, snapshot);
         }
 
@@ -66,16 +51,20 @@ namespace IncinerateService.Core
             return m_LearningAgents.GetAll();
         }
 
-        public void AddWatcher(Agent agent, IStrategy redStrategy, IStrategy yellowStrategy)
+        public void AddWatcher(Agent agent, IStrategy redStrategy, IStrategy yellowStrategy,
+            double p1, double p2)
         {
-            m_WatchingAgent = agent;
-            m_RedStrategy = redStrategy;
-            m_YellowStrategy = yellowStrategy;
+            m_WatchingAgents.AddWatcher(agent, redStrategy, yellowStrategy, p1, p2);
         }
 
-        public void StopWatch()
+        public void StopWatch(Agent agent)
         {
-            m_WatchingAgent = null;
+            m_WatchingAgents.Stop(agent);
+        }
+
+        public void StopWatchAll()
+        {
+            m_WatchingAgents.StopAll();
         }
     }
 }

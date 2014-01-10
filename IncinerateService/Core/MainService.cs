@@ -24,6 +24,7 @@ namespace IncinerateService.Core
         Dictionary<string, IStrategy> Strategies = new Dictionary<string, IStrategy>()
         {
             { "alert", new AlertStrategy()},
+            { "terminate", new HitTerminateStrategy(1)},
             { "terminate10", new HitTerminateStrategy(10)}
         };
         State m_State;
@@ -43,12 +44,15 @@ namespace IncinerateService.Core
             m_State.Disable();
         }
 
-        private void StartWatching(string name, string strategyRed, string strategyYellow)
+        private void StartWatching(string name,
+            string strategyRed, string strategyYellow,
+            double p1, double p2)
         {
             m_State.Disable();
             m_State = new WatchingState(name, m_Collector, m_History,
                 m_AgentRegistry, m_AgentStorage,
-                ParseStrategy(strategyRed), ParseStrategy(strategyYellow));
+                ParseStrategy(strategyRed), ParseStrategy(strategyYellow),
+                p1, p2);
             m_State.Enable();
         }
 
@@ -115,10 +119,10 @@ namespace IncinerateService.Core
             return response;
         }
 
-        public void Watch(string name, string strategyRed, string strategyYellow)
+        public void Watch(string name, string strategyRed, string strategyYellow, double p1, double p2)
         {
-            StartWatching(name, strategyRed, strategyYellow);
-            Console.WriteLine("Watch: {0} ({1}, {2})", name, strategyRed, strategyYellow);
+            StartWatching(name, strategyRed, strategyYellow, p1, p2);
+            Console.WriteLine("Watch: {0} ({1}, {2}) [{3:0.00}, {4:0.00}]", name, strategyRed, strategyYellow, p1, p2);
         }
 
         public void Stop()
@@ -231,6 +235,7 @@ namespace IncinerateService.Core
 
     class WatchingState : State
     {
+        double m_P1, m_P2;
         IAgentStorage m_AgentStorage;
         string m_Name;
         IStrategy m_RedStrategy;
@@ -242,7 +247,8 @@ namespace IncinerateService.Core
             AgentRegistry agentRegistry,
             IAgentStorage agentStorage,
             IStrategy redStrategy,
-            IStrategy yellowStrategy
+            IStrategy yellowStrategy,
+            double p1, double p2
             )
             : base(collector, history, agentRegistry)
         {
@@ -250,6 +256,8 @@ namespace IncinerateService.Core
             m_Name = name;
             m_RedStrategy = redStrategy;
             m_YellowStrategy = yellowStrategy;
+            m_P1 = p1;
+            m_P2 = p2;
         }
 
         public override void Enable()
@@ -259,7 +267,7 @@ namespace IncinerateService.Core
             {
                 return;
             }
-            m_AgentRegistry.AddWatcher(agent, m_RedStrategy, m_YellowStrategy);
+            m_AgentRegistry.AddWatcher(agent, m_RedStrategy, m_YellowStrategy, m_P1, m_P2);
             m_Collector.ActionOccurred += new Action<TraceEvent>(m_Collector_ActionOccurred);
             m_History.SnapshotReady += new EventHandler<SnapshotReadyEventArgs>(m_History_SnapshotReady);
             m_Collector.Start();
@@ -270,7 +278,7 @@ namespace IncinerateService.Core
         public override void Disable()
         {
             m_Collector.Stop();
-            m_AgentRegistry.StopWatch();
+            m_AgentRegistry.StopWatchAll();
         }
 
         void m_History_SnapshotReady(object sender, SnapshotReadyEventArgs e)

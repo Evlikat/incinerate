@@ -45,9 +45,13 @@ namespace IncinerateCmd
                         }
                         customersProxy.AddLearningAgent(pids, cmdArgs.AgentName);
                     }
-                    else if (cmdArgs.Watched != null && cmdArgs.StrategyRed != null && cmdArgs.StrategyYellow != null)
+                    else if (cmdArgs.Watched != null
+                        && cmdArgs.StrategyRed != null && cmdArgs.StrategyYellow != null
+                        && cmdArgs.P1 != null && cmdArgs.P2 != null)
                     {
-                        customersProxy.Watch(cmdArgs.Watched, cmdArgs.StrategyRed, cmdArgs.StrategyYellow);
+                        customersProxy.Watch(cmdArgs.Watched,
+                            cmdArgs.StrategyRed, cmdArgs.StrategyYellow,
+                            Double.Parse(cmdArgs.P1), Double.Parse(cmdArgs.P2));
                     }
                     else if (cmdArgs.Stop != null)
                     {
@@ -63,6 +67,10 @@ namespace IncinerateCmd
             catch (CommunicationObjectFaultedException ex)
             {
                 Console.WriteLine("Service is not working");
+            }
+            catch (FormatException ex)
+            {
+                Console.WriteLine("Illegal agruments");
             }
             catch (EndpointNotFoundException ex)
             {
@@ -96,6 +104,12 @@ namespace IncinerateCmd
 
         [Option(Short = "sy", Description = "Selects a strategy for yellow line reaching")]
         public string StrategyYellow = null;
+
+        [Option(Short = "p1", Description = "Determines yellow threshold")]
+        public string P1 = null;
+
+        [Option(Short = "p2", Description = "Determines red threshold")]
+        public string P2 = null;
 
         [Option(Short = "q", Description = "Stops any activity in service")]
         public bool Stop = false;

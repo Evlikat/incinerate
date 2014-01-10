@@ -16,7 +16,7 @@ namespace IncinerateService.API
         IList<string> GetAgents();
 
         [OperationContract]
-        void Watch(string name, string strategyRed, string strategyYellow);
+        void Watch(string name, string strategyRed, string strategyYellow, double p1, double p2);
 
         [OperationContract]
         void Stop();
