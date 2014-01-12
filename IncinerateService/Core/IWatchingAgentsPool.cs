@@ -12,15 +12,19 @@ namespace IncinerateService.Core
             IStrategy redStrategy, IStrategy yellowStrategy,
             double p1, double p2);
 
-        void Stop(Agent agent);
+        bool Stop(string name);
 
         void StopAll();
 
         IRecognizedAgent Compute(HistorySnapshot snapshot);
+
+        ICollection<WatchingAgentSession> GetAll();
     }
 
     interface IRecognizedAgent
     {
+        double MaxRes { get; }
+
         void Apply(int pid);
     }
 }

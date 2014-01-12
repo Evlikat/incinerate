@@ -22,14 +22,19 @@ namespace IncinerateService.Core
             }
         }
 
-        public void Stop(Agent agent)
+        public bool Stop(string name)
         {
             lock (syncRoot)
             {
-                if (!m_Agents.ContainsKey(agent))
+                foreach (Agent agent in m_Agents.Keys)
                 {
-                    m_Agents.Remove(agent);
+                    if (String.Compare(agent.Name, name) == 0)
+                    {
+                        m_Agents.Remove(agent);
+                        return true;
+                    }
                 }
+                return false;
             }
         }
 
@@ -44,7 +49,7 @@ namespace IncinerateService.Core
 
         public IRecognizedAgent Compute(HistorySnapshot snapshot)
         {
-            double max = 0;
+            double max = -1.0;
             IRecognizedAgent recognized = new NotRecognizedAgent();
             lock (syncRoot)
             {
@@ -54,21 +59,29 @@ namespace IncinerateService.Core
                     if (res > max)
                     {
                         max = res;
-                        recognized = new RecognizedAgent(res,
+                        RecognizedAgent newRecognized = new RecognizedAgent(res,
                             agentSession.Value.RedStrategy,
                             agentSession.Value.YellowStrategy,
                             agentSession.Value.P1,
                             agentSession.Value.P2);
+                        newRecognized.MaxRes = max;
+                        recognized = newRecognized;
                     }
                 }
             }
             return recognized;
+        }
+
+        public ICollection<WatchingAgentSession> GetAll()
+        {
+            return m_Agents.Values;
         }
     }
 
     class WatchingAgentSession
     {
         Agent m_Agent;
+        public string AgentName { get { return m_Agent.Name; } }
         public double P1 { get; private set; }
         public double P2 { get; private set; }
         public IStrategy RedStrategy { get; private set; }
@@ -119,10 +132,17 @@ namespace IncinerateService.Core
             }
             
         }
+
+        public double MaxRes { get; set; }
     }
 
     class NotRecognizedAgent : IRecognizedAgent
     {
         public void Apply(int pid) { }
+
+        public double MaxRes
+        {
+            get { return 0.0; }
+        }
     }
 }

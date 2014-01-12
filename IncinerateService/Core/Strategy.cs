@@ -42,7 +42,7 @@ namespace IncinerateService.Core
         public void Apply(double res, int pid)
         {
             hits++;
-            Console.WriteLine("Обнаружен запрещенный процесс {0} [{1:0.000000}]. hits: {2s}", pid, res, hits);
+            Console.WriteLine("Обнаружен запрещенный процесс {0} [{1:0.000000}]. hits: {2}", pid, res, hits);
             if (hits >= m_MaxHits)
             {
                 Console.WriteLine("Завершение процесса {0}...", pid);

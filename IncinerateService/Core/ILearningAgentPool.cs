@@ -11,6 +11,8 @@ namespace IncinerateService.Core
     {
         void AddAgent(LearningAgent learningAgent);
 
+        bool RemoveAgent(string name);
+
         ICollection<Agent> TrainAll(IPID iPID, HistorySnapshot snapshot);
 
         bool IsEmpty();

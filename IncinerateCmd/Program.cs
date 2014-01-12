@@ -27,11 +27,11 @@ namespace IncinerateCmd
                     IIncinerateService customersProxy = clientFactory.CreateChannel();
                     if (cmdArgs.GetAgents)
                     {
-                        IList<string> lines = customersProxy.GetAgents();
+                        IList<AgentInfo> lines = customersProxy.GetAgents();
                         StringBuilder sb = new StringBuilder();
-                        foreach (string line in lines)
+                        foreach (AgentInfo line in lines)
                         {
-                            sb.AppendLine(line);
+                            sb.AppendLine(line.Name + ": " + line.Status);
                         }
                         Console.WriteLine(sb.ToString());
                     }

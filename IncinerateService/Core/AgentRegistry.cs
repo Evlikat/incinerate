@@ -41,14 +41,19 @@ namespace IncinerateService.Core
             m_LearningAgents.AddAgent(newAgent);
         }
 
-        public void StopLearning()
+        public bool StopLearning(string name)
         {
-            m_LearningAgents.Clear();
+            return m_LearningAgents.RemoveAgent(name);
         }
 
         public ICollection<LearningAgent> GetLearningAgents()
         {
             return m_LearningAgents.GetAll();
+        }
+
+        public ICollection<WatchingAgentSession> GetWatchingAgents()
+        {
+            return m_WatchingAgents.GetAll();
         }
 
         public void AddWatcher(Agent agent, IStrategy redStrategy, IStrategy yellowStrategy,
@@ -57,9 +62,9 @@ namespace IncinerateService.Core
             m_WatchingAgents.AddWatcher(agent, redStrategy, yellowStrategy, p1, p2);
         }
 
-        public void StopWatch(Agent agent)
+        public bool StopWatch(string name)
         {
-            m_WatchingAgents.Stop(agent);
+            return m_WatchingAgents.Stop(name);
         }
 
         public void StopWatchAll()

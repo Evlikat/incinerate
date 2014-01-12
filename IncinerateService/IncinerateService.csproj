@@ -53,10 +53,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Advapi32Dll.cs" />
+    <Compile Include="API\AgentInfo.cs" />
     <Compile Include="API\IIncinerateService.cs" />
     <Compile Include="CommandLineArgs.cs" />
     <Compile Include="Core\Agent.cs" />
-    <Compile Include="Core\AgentInfo.cs" />
     <Compile Include="Core\AgentRegistry.cs" />
     <Compile Include="Core\CachedAgentStorage.cs" />
     <Compile Include="Core\IAgentStorage.cs" />
@@ -67,7 +67,6 @@
     <Compile Include="Core\LearningConfig.cs" />
     <Compile Include="Core\MultiLearningAgentPool.cs" />
     <Compile Include="Core\MainService.cs" />
-    <Compile Include="Core\NullPool.cs" />
     <Compile Include="Core\Strategy.cs" />
     <Compile Include="Core\WatchingAgentPool.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -81,6 +80,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.ServiceProcess" />
   </ItemGroup>

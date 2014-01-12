@@ -13,10 +13,16 @@ namespace IncinerateService.API
         void AddLearningAgent(IList<int> pid, string name);
 
         [OperationContract]
-        IList<string> GetAgents();
+        void RemoveLearningAgent(string name);
+
+        [OperationContract]
+        IList<AgentInfo> GetAgents();
 
         [OperationContract]
         void Watch(string name, string strategyRed, string strategyYellow, double p1, double p2);
+
+        [OperationContract]
+        void StopWatch(string name);
 
         [OperationContract]
         void Stop();

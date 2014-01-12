@@ -47,7 +47,6 @@ namespace IncinerateService.Core
             m_LearningAgents.Clear();
         }
 
-
         public ICollection<LearningAgent> GetAll()
         {
             return m_LearningAgents;
@@ -56,6 +55,19 @@ namespace IncinerateService.Core
         public bool IsEmpty()
         {
             return m_LearningAgents.Count == 0;
+        }
+
+        public bool RemoveAgent(string name)
+        {
+            foreach (LearningAgent agent in m_LearningAgents)
+            {
+                if (String.Compare(agent.Name, name) == 0)
+                {
+                    m_LearningAgents.Remove(agent);
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

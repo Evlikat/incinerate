@@ -6,13 +6,22 @@ using System.Collections.ObjectModel;
 
 namespace IncinerateUI
 {
-    class GeneralSource
+    class GeneralSource : NotifyPropertyChanged
     {
-        public ObservableCollection<AgentController> Agents { get; set; }
-
+        ObservableCollection<AgentController> m_Agents;
+        public ObservableCollection<AgentController> Agents
+        {
+            get { return m_Agents; }
+            set
+            {
+                m_Agents = value;
+                RaisePropertyChanged("Agents");
+            }
+        }
+        
         public GeneralSource()
         {
-            Agents = new ObservableCollection<AgentController>();
+            m_Agents = new ObservableCollection<AgentController>();
         }
     }
 }
