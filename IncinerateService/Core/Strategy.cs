@@ -18,10 +18,17 @@ namespace IncinerateService.Core
 
     class AlertStrategy : IStrategy
     {
-
         public void Apply(double res, int pid)
         {
             Console.WriteLine("Обнаружен запрещенный процесс: {0} [{1:0.000000}]", pid, res);
+        }
+    }
+
+    class AlarmStrategy : IStrategy
+    {
+        public void Apply(double res, int pid)
+        {
+            Console.WriteLine("Зафиксирована аномальная активность для: {0} [{1:0.000000}]", pid, res);
         }
     }
 

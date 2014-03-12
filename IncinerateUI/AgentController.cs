@@ -43,7 +43,7 @@ namespace IncinerateUI
                 }
                 else if (m_Status == AgentStatus.Ready)
                 {
-                    AvailableCommand = new RunCommand();
+                    AvailableCommand = new RunCommand(new WatchCommand(), new GuardCommand());
                 }
                 else
                 {

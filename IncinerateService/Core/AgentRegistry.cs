@@ -15,6 +15,7 @@ namespace IncinerateService.Core
 
         ILearningAgentPool m_LearningAgents = new MultiLearningAgentPool();
         IWatchingAgentsPool m_WatchingAgents = new WatchingAgentPool();
+        IGuardianAgentsPool m_GuardianAgents = new GuardianAgentsPool();
 
         public ICollection<Agent> Handle(IPID iPID, IList<IProcessAction> actions)
         {
@@ -22,6 +23,12 @@ namespace IncinerateService.Core
 
             IRecognizedAgent recognized = m_WatchingAgents.Compute(snapshot);
             recognized.Apply(iPID.PID);
+
+            IEnumerable<AgentReaction> reactions = m_GuardianAgents.Compute(snapshot);
+            foreach (AgentReaction reaction in reactions)
+            {
+                reaction.Apply();
+            }
             
             return m_LearningAgents.TrainAll(iPID, snapshot);
         }
@@ -52,6 +59,11 @@ namespace IncinerateService.Core
             return m_WatchingAgents.GetAll();
         }
 
+        public ICollection<GuardianAgentSession> GetGuardianAgents()
+        {
+            return m_GuardianAgents.GetAll();
+        }
+
         public void AddWatcher(Agent agent, IStrategy redStrategy, IStrategy yellowStrategy,
             double p1, double p2)
         {
@@ -66,6 +78,17 @@ namespace IncinerateService.Core
         public void StopWatchAll()
         {
             m_WatchingAgents.StopAll();
+        }
+
+        public void AddGuardian(Agent agent, string processName, IStrategy redStrategy, IStrategy yellowStrategy,
+            double p1, double p2)
+        {
+            m_GuardianAgents.AddGuardian(agent, processName, redStrategy, yellowStrategy, p1, p2);
+        }
+
+        public bool StopGuard(string name)
+        {
+            return m_GuardianAgents.Stop(name);
         }
     }
 }

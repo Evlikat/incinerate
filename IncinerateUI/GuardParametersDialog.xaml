@@ -23,8 +23,8 @@
         <Label Grid.Row="4" Grid.Column="0" Content="Red Strategy"/>
 
         <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Process}"/>
-        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding P1}"/>
-        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding P2}"/>
+        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding E1}"/>
+        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding E2}"/>
         <ComboBox Grid.Row="3" Grid.Column="1"
                   ItemsSource="{Binding Path=Strategies}"
                   DisplayMemberPath="Name"

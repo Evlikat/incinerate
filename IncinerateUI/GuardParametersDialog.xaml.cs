@@ -49,9 +49,9 @@ namespace IncinerateUI
 
         public GuardParametersDialogSettings()
         {
-            Process = "Enter process name";
-            E1 = 0.15;
-            E2 = 0.4;
+            Process = "Enter Process name";
+            E1 = 0.0;
+            E2 = 0.0;
             Strategies = new List<GuardStrategy>()
             {
                 new GuardStrategy() { Name = "alarm" },

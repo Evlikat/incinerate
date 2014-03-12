@@ -38,7 +38,7 @@ namespace IncinerateUI
             }
             catch (ServiceException ex)
             {
-                MessageBox.Show("Can not get agent list. Perhaps service is not running.",
+                MessageBox.Show("Can not get Agent list. Perhaps service is not running.",
                     "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
@@ -74,6 +74,7 @@ namespace IncinerateUI
         {
             AgentController controller = (sender as Button).DataContext as AgentController;
             controller.AvailableCommand.AgentName = controller.Name;
+            Command finalCommand = controller.AvailableCommand;
             if (controller.AvailableCommand is RunCommand)
             {
                 WatchParametersDialog dlg = new WatchParametersDialog();
@@ -81,45 +82,52 @@ namespace IncinerateUI
                 bool? result = dlg.ShowDialog();
                 if (result == true)
                 {
-                    WatchCommand cmd = controller.AvailableCommand as WatchCommand;
+                    WatchCommand cmd = new WatchCommand();
+                    cmd.AgentName = controller.AvailableCommand.AgentName;
                     cmd.RedStrategy = dlg.Settings.RedStrategy.Name;
                     cmd.YellowStrategy = dlg.Settings.YellowStrategy.Name;
                     cmd.P1 = dlg.Settings.P1;
                     cmd.P2 = dlg.Settings.P2;
+                    finalCommand = cmd;
+                    
                 }
                 else
                 {
                     return;
                 }
             }
-            m_Client.Execute(controller.AvailableCommand);
+            m_Client.Execute(finalCommand);
             RefreshAgentList();
         }
 
-        private void CmdButton_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void CmdButton_MouseRightClick(object sender, MouseButtonEventArgs e)
         {
             AgentController controller = (sender as Button).DataContext as AgentController;
             controller.AvailableCommand.AgentName = controller.Name;
+            Command finalCommand = controller.AvailableCommand;
             if (controller.AvailableCommand is RunCommand)
             {
                 GuardParametersDialog dlg = new GuardParametersDialog();
                 dlg.Owner = this;
+                dlg.Settings.Process = controller.Name;
                 bool? result = dlg.ShowDialog();
                 if (result == true)
                 {
-                    GuardCommand cmd = controller.AvailableCommand as GuardCommand;
+                    GuardCommand cmd = new GuardCommand();
                     cmd.Process = dlg.Settings.Process;
+                    cmd.AgentName = controller.AvailableCommand.AgentName;
                     cmd.RedStrategy = dlg.Settings.RedStrategy.Name;
                     cmd.YellowStrategy = dlg.Settings.YellowStrategy.Name;
                     cmd.E1 = dlg.Settings.E1;
                     cmd.E2 = dlg.Settings.E2;
+                    finalCommand = cmd;
                 }
                 else
                 {
                     return;
                 }
             }
-            m_Client.Execute(controller.AvailableCommand);
+            m_Client.Execute(finalCommand);
             RefreshAgentList();
         }
 

@@ -28,6 +28,14 @@ namespace IncinerateUI
 
     class RunCommand : AgentCommand
     {
+        public WatchCommand WatchCmd { get; private set; }
+        public GuardCommand GuardCmd { get; private set; }
+
+        public RunCommand(WatchCommand watchCmd, GuardCommand guardCmd)
+        {
+            Name = "Watch / Guard";
+        }
+
         public override CommandResult Execute(IIncinerateService service)
         {
             return new NoResult();

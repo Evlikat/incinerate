@@ -1,7 +1,7 @@
 ﻿<Window x:Class="IncinerateUI.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Incinerate Client 0.1" Height="600" Width="600" WindowStartupLocation="CenterScreen"
+        Title="Incinerate Client 0.1" Height="600" Width="700" WindowStartupLocation="CenterScreen"
         Loaded="Window_Loaded">
     <StackPanel >
         <Button Content="Add Rule" Click="AddRule_Click"/>
@@ -14,11 +14,11 @@
                 </DataGridTextColumn>
                 <DataGridTextColumn Binding="{Binding Path=Status.Name}" Header="Status" Width="75">
                 </DataGridTextColumn>
-                <DataGridTemplateColumn Width="75">
+                <DataGridTemplateColumn Width="100">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button Click="CmdButton_Click"
-                                    MouseDoubleClick="CmdButton_MouseDoubleClick"
+                                    MouseRightButtonDown="CmdButton_MouseRightClick"
                                     Content="{Binding Path=AvailableCommand.Name}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>

@@ -11,7 +11,7 @@ namespace IncinerateService.Core
     class CachedAgentStorage : IAgentStorage
     {
         private const string AgentStoragePath = @"c:\ProgramData\Incinerate";
-        private const string AgentSuffix = ".agent";
+        private const string AgentSuffix = ".Agent";
 
         public CachedAgentStorage()
         {

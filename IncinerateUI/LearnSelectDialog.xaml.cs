@@ -44,8 +44,8 @@ namespace IncinerateUI
         {
             if (Settings.SelectedProcesses.Count == 0)
             {
-                MessageBox.Show("Select at least one process",
-                    "No process selected", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Select at least one Process",
+                    "No Process selected", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
             this.DialogResult = true;

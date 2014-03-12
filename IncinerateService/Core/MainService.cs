@@ -24,6 +24,8 @@ namespace IncinerateService.Core
         Dictionary<string, IStrategy> Strategies = new Dictionary<string, IStrategy>()
         {
             { "alert", new AlertStrategy()},
+            { "alarm", new AlarmStrategy()},
+            { "warning", new AlarmStrategy()},
             { "terminate", new HitTerminateStrategy(1)},
             { "terminate10", new HitTerminateStrategy(10)}
         };
@@ -99,15 +101,25 @@ namespace IncinerateService.Core
                 p1, p2);
         }
 
-        public void Guard(string name, string process, string strategyRed,
+        public void StartGuard(string name, string process, string strategyRed,
             string strategyYellow, double e1, double e2)
         {
-            Console.WriteLine("Guard: {0}", name);
+            Agent agent = m_AgentStorage.LoadAgent(name);
+            if (agent == null)
+            {
+                return;
+            }
+            m_AgentRegistry.AddGuardian(agent, process,
+                ParseStrategy(strategyRed), ParseStrategy(strategyYellow),
+                e1, e2);
         }
 
         public void StopGuard(string name)
         {
-            Console.WriteLine("StopGuard: {0}", name);
+            if (m_AgentRegistry.StopGuard(name))
+            {
+                Console.WriteLine("Agent {0} guardian has been stopped", name);
+            }
         }
 
         private IStrategy ParseStrategy(string strategyName)
@@ -162,6 +174,13 @@ namespace IncinerateService.Core
                 response.Add(new AgentInfo { Name = watchingAgent.AgentName, Status = "Watching" });
                 watchingAgentNames.Add(watchingAgent.AgentName);
             }
+            ICollection<GuardianAgentSession> guardianAgents = m_AgentRegistry.GetGuardianAgents();
+            ISet<string> guardianAgentNames = new HashSet<string>();
+            foreach (GuardianAgentSession guardianAgent in guardianAgents)
+            {
+                response.Add(new AgentInfo { Name = guardianAgent.Agent.Name, Status = "Guarding" });
+                watchingAgentNames.Add(guardianAgent.Agent.Name);
+            }
             foreach (string agentName in m_AgentStorage.GetAgentNames())
             {
                 if (!watchingAgentNames.Contains(agentName))
@@ -178,6 +197,21 @@ namespace IncinerateService.Core
             {
                 StartWatching(name, strategyRed, strategyYellow, p1, p2);
                 Console.WriteLine("Watch: {0} ({1}, {2}) [{3:0.00}, {4:0.00}]", name, strategyRed, strategyYellow, p1, p2);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+        }
+
+        public void Guard(string name, string process, string strategyRed,
+            string strategyYellow, double e1, double e2)
+        {
+            try
+            {
+                StartGuard(name, process, strategyRed, strategyYellow, e1, e2);
+                Console.WriteLine("Guard: {0} - {1} ({2}, {3}) [{4:0.00}, {5:0.00}]",
+                    name, process, strategyRed, strategyYellow, e1, e2);
             }
             catch (Exception ex)
             {

@@ -59,7 +59,9 @@
     <Compile Include="Core\Agent.cs" />
     <Compile Include="Core\AgentRegistry.cs" />
     <Compile Include="Core\CachedAgentStorage.cs" />
+    <Compile Include="Core\GuardianAgentsPool.cs" />
     <Compile Include="Core\IAgentStorage.cs" />
+    <Compile Include="Core\IGuardianAgentsPool.cs" />
     <Compile Include="Core\ILearningAgentPool.cs" />
     <Compile Include="Core\IProcessStrategy.cs" />
     <Compile Include="Core\IWatchingAgentsPool.cs" />
@@ -80,6 +82,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.ServiceProcess" />

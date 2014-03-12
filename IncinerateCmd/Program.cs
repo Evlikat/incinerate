@@ -93,10 +93,10 @@ namespace IncinerateCmd
         [Option(Short = "w", Description = "Start one of agents to watch processes")]
         public string Watched = null;
 
-        [Option(Short = "p", Description = "PIDs of target process sample divided by ',' sign")]
+        [Option(Short = "p", Description = "PIDs of target Process sample divided by ',' sign")]
         public string ProcessIDs = null;
 
-        [Option(Short = "a", Description = "Start to learn specified process behaviour")]
+        [Option(Short = "a", Description = "Start to learn specified Process behaviour")]
         public string AgentName = null;
 
         [Option(Short = "sr", Description = "Selects a strategy for red line reaching")]
