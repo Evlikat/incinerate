@@ -63,15 +63,14 @@ namespace IncinerateService.Core
         private void m_History_SnapshotReady(object sender, SnapshotReadyEventArgs e)
         {
             ICollection<Agent> newAgents = m_AgentRegistry.Handle(e.PID, e.Events);
-            if (e.PID.PID == 1516)
-            {
-                int k = 0;
-            }
             if (newAgents.Count > 0)
             {
                 foreach (Agent agent in newAgents)
                 {
-                    Console.WriteLine("Agent '{0}' has been learned");
+                    Console.WriteLine("Agent {0} has been learned", agent.Name);
+                    m_AgentStorage.SaveAgent(agent.Name, agent);
+                    Console.WriteLine("Agent has been saved: {0}", agent.Name);
+                    m_AgentRegistry.StopLearning(agent.Name);
                 }
             }
         }
@@ -98,6 +97,17 @@ namespace IncinerateService.Core
             m_AgentRegistry.AddWatcher(agent,
                 ParseStrategy(strategyRed), ParseStrategy(strategyYellow),
                 p1, p2);
+        }
+
+        public void Guard(string name, string process, string strategyRed,
+            string strategyYellow, double e1, double e2)
+        {
+            Console.WriteLine("Guard: {0}", name);
+        }
+
+        public void StopGuard(string name)
+        {
+            Console.WriteLine("StopGuard: {0}", name);
         }
 
         private IStrategy ParseStrategy(string strategyName)

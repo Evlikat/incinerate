@@ -37,9 +37,13 @@ namespace IncinerateUI
                 {
                     AvailableCommand = new StopWatchCommand();
                 }
+                else if (m_Status == AgentStatus.Guarding)
+                {
+                    AvailableCommand = new StopGuardCommand();
+                }
                 else if (m_Status == AgentStatus.Ready)
                 {
-                    AvailableCommand = new WatchCommand();
+                    AvailableCommand = new RunCommand();
                 }
                 else
                 {
@@ -50,9 +54,5 @@ namespace IncinerateUI
             }
         }
         public AgentCommand AvailableCommand { get; private set; }
-
-        public AgentController()
-        {
-        }
     }
 }

@@ -10,11 +10,12 @@ namespace IncinerateUI
         public static AgentStatus Learning = new AgentStatus { Name = "Learning" };
         public static AgentStatus Ready = new AgentStatus { Name = "Ready" };
         public static AgentStatus Watching = new AgentStatus { Name = "Watching" };
+        public static AgentStatus Guarding = new AgentStatus { Name = "Guarding" };
         public static AgentStatus Unknown = new AgentStatus { Name = "Unknown" };
 
         private static IList<AgentStatus> All = new List<AgentStatus>()
         {
-            Learning, Ready, Watching, Unknown
+            Learning, Ready, Watching, Guarding, Unknown
         };
 
         public string Name{ get; private set; }

@@ -17,7 +17,9 @@
                 <DataGridTemplateColumn Width="75">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Click="CmdButton_Click" Content="{Binding Path=AvailableCommand.Name}"/>
+                            <Button Click="CmdButton_Click"
+                                    MouseDoubleClick="CmdButton_MouseDoubleClick"
+                                    Content="{Binding Path=AvailableCommand.Name}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

@@ -28,10 +28,6 @@ namespace IncinerateService.Core
 
         public void CreateLearningAgent(LearningConfig learningConfig)
         {
-            if (!m_LearningAgents.IsEmpty())
-            {
-                return;
-            }
             LearningAgent newAgent = new LearningAgent(
                 learningConfig.Name,
                 learningConfig.NativePids,

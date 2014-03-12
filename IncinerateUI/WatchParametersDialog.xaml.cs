@@ -40,26 +40,26 @@ namespace IncinerateUI
 
     public class WatchParametersDialogSettings : NotifyPropertyChanged
     {
-        public IList<AvailableStrategy> Strategies { get; private set; }
+        public IList<WatchStrategy> Strategies { get; private set; }
         public double P1 { get; set; }
         public double P2 { get; set; }
-        public AvailableStrategy YellowStrategy { get; set; }
-        public AvailableStrategy RedStrategy { get; set; }
+        public WatchStrategy YellowStrategy { get; set; }
+        public WatchStrategy RedStrategy { get; set; }
 
         public WatchParametersDialogSettings()
         {
             P1 = 0.15;
             P2 = 0.4;
-            Strategies = new List<AvailableStrategy>()
+            Strategies = new List<WatchStrategy>()
             {
-                new AvailableStrategy() { Name = "alert" },
-                new AvailableStrategy() { Name = "terminate" },
-                new AvailableStrategy() { Name = "terminate10" }
+                new WatchStrategy() { Name = "alert" },
+                new WatchStrategy() { Name = "terminate" },
+                new WatchStrategy() { Name = "terminate10" }
             };
         }
     }
 
-    public class AvailableStrategy
+    public class WatchStrategy
     {
         public string Name { get; set; }
     }

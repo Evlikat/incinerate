@@ -26,6 +26,14 @@ namespace IncinerateUI
         public string AgentName { get; set; }
     }
 
+    class RunCommand : AgentCommand
+    {
+        public override CommandResult Execute(IIncinerateService service)
+        {
+            return new NoResult();
+        }
+    }
+
     class WatchCommand : AgentCommand
     {
         public string RedStrategy { get; set; }
@@ -45,6 +53,26 @@ namespace IncinerateUI
         }
     }
 
+    class GuardCommand : AgentCommand
+    {
+        public string Process { get; set; }
+        public string RedStrategy { get; set; }
+        public string YellowStrategy { get; set; }
+        public double E1 { get; set; }
+        public double E2 { get; set; }
+
+        public GuardCommand()
+        {
+            Name = "Guard";
+        }
+
+        public override CommandResult Execute(IIncinerateService service)
+        {
+            service.Guard(AgentName, Process, RedStrategy, YellowStrategy, E1, E2);
+            return new NoResult();
+        }
+    }
+
     class StopWatchCommand : AgentCommand
     {
         public StopWatchCommand()
@@ -55,6 +83,20 @@ namespace IncinerateUI
         public override CommandResult Execute(IIncinerateService service)
         {
             service.StopWatch(AgentName);
+            return new NoResult();
+        }
+    }
+
+    class StopGuardCommand : AgentCommand
+    {
+        public StopGuardCommand()
+        {
+            Name = "Stop Guard";
+        }
+
+        public override CommandResult Execute(IIncinerateService service)
+        {
+            service.StopGuard(AgentName);
             return new NoResult();
         }
     }

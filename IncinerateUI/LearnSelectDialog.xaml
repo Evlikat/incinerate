@@ -1,7 +1,7 @@
 ﻿<Window x:Class="IncinerateUI.LearnSelectDialog"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="LearnSelectDialog" SizeToContent="WidthAndHeight" ResizeMode="NoResize"
+        Title="Add New Rule" SizeToContent="WidthAndHeight" ResizeMode="NoResize"
         WindowStartupLocation="CenterOwner" Loaded="Window_Loaded">
     <Grid>
         <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">

@@ -27,6 +27,7 @@ namespace IncinerateService.Core
 
     class HitTerminateStrategy : IStrategy
     {
+        object m_Sync;
         int hits = 0;
         int m_MaxHits;
 
@@ -41,13 +42,20 @@ namespace IncinerateService.Core
 
         public void Apply(double res, int pid)
         {
-            hits++;
-            Console.WriteLine("Обнаружен запрещенный процесс {0} [{1:0.000000}]. hits: {2}", pid, res, hits);
-            if (hits >= m_MaxHits)
+            lock (m_Sync)
             {
-                Console.WriteLine("Завершение процесса {0}...", pid);
-                Process targetProcess = Process.GetProcessById(pid);
-                targetProcess.Kill();
+                hits++;
+                Console.WriteLine("Обнаружен запрещенный процесс {0} [{1:0.000000}]. hits: {2}", pid, res, hits);
+                if (hits >= m_MaxHits)
+                {
+                    Console.WriteLine("Завершение процесса {0}...", pid);
+                    Process targetProcess = Process.GetProcessById(pid);
+                    if (targetProcess != null)
+                    {
+                        targetProcess.Kill();
+                    }
+                    hits = 0;
+                }
             }
         }
     }

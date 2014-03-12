@@ -67,6 +67,10 @@ namespace IncinerateService.Core
                         newRecognized.MaxRes = max;
                         recognized = newRecognized;
                     }
+                    if (snapshot.PID.PID == 3072 || snapshot.PID.PID == 5896)
+                    {
+                        Console.WriteLine("Process: {0:0.000000}", res);
+                    }
                 }
             }
             return recognized;
@@ -130,7 +134,7 @@ namespace IncinerateService.Core
                     m_YellowStrategy.Apply(m_Res, pid);
                 }
             }
-            
+
         }
 
         public double MaxRes { get; set; }

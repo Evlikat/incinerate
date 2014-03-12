@@ -74,7 +74,7 @@ namespace IncinerateUI
         {
             AgentController controller = (sender as Button).DataContext as AgentController;
             controller.AvailableCommand.AgentName = controller.Name;
-            if (controller.AvailableCommand is WatchCommand)
+            if (controller.AvailableCommand is RunCommand)
             {
                 WatchParametersDialog dlg = new WatchParametersDialog();
                 dlg.Owner = this;
@@ -92,8 +92,32 @@ namespace IncinerateUI
                     return;
                 }
             }
-            else
+            m_Client.Execute(controller.AvailableCommand);
+            RefreshAgentList();
+        }
+
+        private void CmdButton_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            AgentController controller = (sender as Button).DataContext as AgentController;
+            controller.AvailableCommand.AgentName = controller.Name;
+            if (controller.AvailableCommand is RunCommand)
             {
+                GuardParametersDialog dlg = new GuardParametersDialog();
+                dlg.Owner = this;
+                bool? result = dlg.ShowDialog();
+                if (result == true)
+                {
+                    GuardCommand cmd = controller.AvailableCommand as GuardCommand;
+                    cmd.Process = dlg.Settings.Process;
+                    cmd.RedStrategy = dlg.Settings.RedStrategy.Name;
+                    cmd.YellowStrategy = dlg.Settings.YellowStrategy.Name;
+                    cmd.E1 = dlg.Settings.E1;
+                    cmd.E2 = dlg.Settings.E2;
+                }
+                else
+                {
+                    return;
+                }
             }
             m_Client.Execute(controller.AvailableCommand);
             RefreshAgentList();

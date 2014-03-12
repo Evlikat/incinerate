@@ -73,12 +73,8 @@ namespace NeuroApplication
                     );
                 console.WriteLine(res);
                 string resTable = String.Format(
-                    Prefix + "{0},{1},{2:0.00}%,{5},{6:0.00}%,{7},{8:0.00}%",
-                    successCount, total, (double)successCount / total * 100,
-                    wrongYes + wrongNo, (double)(wrongYes + wrongNo) / total * 100,
-                    wrongNo, (double)wrongNo / expectedNo * 100,
-                    wrongYes, (double)wrongYes / expectedYes * 100,
-                    expectedNo, expectedYes
+                    Prefix + "{0},{1},{2},{3},{4},{5:0.00}%",
+                    total, successYes, successNo, wrongNo, wrongYes, (double)successCount / total * 100
                     );
                 writer.WriteLine(resTable);
             }

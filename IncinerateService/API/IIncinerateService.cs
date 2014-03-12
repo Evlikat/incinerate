@@ -25,6 +25,12 @@ namespace IncinerateService.API
         void StopWatch(string name);
 
         [OperationContract]
+        void Guard(string name, string process, string strategyRed, string strategyYellow, double e1, double e2);
+
+        [OperationContract]
+        void StopGuard(string name);
+
+        [OperationContract]
         void Stop();
     }
 }
