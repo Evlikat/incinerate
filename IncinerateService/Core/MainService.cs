@@ -121,7 +121,7 @@ namespace IncinerateService.Core
         {
             if (m_AgentRegistry.StopGuard(name))
             {
-                Console.WriteLine("Страж {0} остановлен", name);
+                Log.Info("Страж {0} остановлен", name);
             }
         }
 

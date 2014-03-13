@@ -55,7 +55,10 @@ namespace NeuroIncinerate.Neuro
 
         private unsafe void Kernel_All(TraceEvent obj)
         {
-            ActionOccurred(obj);
+            if (ActionOccurred != null)
+            {
+                ActionOccurred(obj);
+            }
         }
 
         public void Stop()
@@ -64,7 +67,6 @@ namespace NeuroIncinerate.Neuro
             if (m_TraceEventSource != null)
             {
                 m_TraceEventSource.StopProcessing();
-                m_TraceEventSource.Close();
             }
         }
 

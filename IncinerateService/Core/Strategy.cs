@@ -37,7 +37,7 @@ namespace IncinerateService.Core
 
         public override void Apply(double res, int pid)
         {
-            Log.Info("Обнаружен запрещенный процесс: {0} [{1:0.000000}]", pid, res);
+            Log.Warn("Обнаружен запрещенный процесс: {0} [{1:0.000000}]", pid, res);
         }
     }
 
@@ -47,7 +47,7 @@ namespace IncinerateService.Core
 
         public override void Apply(double res, int pid)
         {
-            Log.Info("Зафиксирована аномальная активность для: {0} [{1:0.000000}]", pid, res);
+            Log.Warn("Зафиксирована аномальная активность для: {0} [{1:0.000000}]", pid, res);
         }
     }
 
@@ -71,10 +71,10 @@ namespace IncinerateService.Core
             lock (m_Sync)
             {
                 hits++;
-                Console.WriteLine("Обнаружен запрещенный процесс {0} [{1:0.000000}]. hits: {2}", pid, res, hits);
+                Log.Warn("Обнаружен запрещенный процесс {0} [{1:0.000000}]. hits: {2}", pid, res, hits);
                 if (hits >= m_MaxHits)
                 {
-                    Console.WriteLine("Завершение процесса {0}...", pid);
+                    Log.Info("Завершение процесса {0}...", pid);
                     Process targetProcess = Process.GetProcessById(pid);
                     if (targetProcess != null)
                     {
