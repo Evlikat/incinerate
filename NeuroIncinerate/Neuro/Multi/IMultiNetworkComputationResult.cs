@@ -32,6 +32,10 @@ namespace NeuroIncinerate.Neuro.Multi
             INetworkTrustRegistry networkTrustRegistry)
         {
             Results = results;
+            if (results.Count < 1)
+            {
+                int i = 0;
+            }
             int vectorLength = results[0].Values.Length;
             Result = new double[vectorLength];
             foreach (NetworkComputationResultEntry resultEntry in results)

@@ -27,7 +27,9 @@ namespace NeuroIncinerate.Neuro
                 m_TraceEventSession.EnableKernelProvider(GetKeyEvents());
 
                 m_TraceEventSource = new ETWTraceEventSource(SessionName, TraceEventSourceType.Session);
-                m_TraceEventSource.Kernel.All += new Action<TraceEvent>(Kernel_All);
+                //m_TraceEventSource.Kernel.All += new Action<TraceEvent>(Kernel_All);
+
+                m_TraceEventSource.Kernel.All += new Action<TraceEvent>(Kernel_All);                
 
                 Running = true;
             }
@@ -59,20 +61,22 @@ namespace NeuroIncinerate.Neuro
         public void Stop()
         {
             Running = false;
-            if (m_TraceEventSource != null) { m_TraceEventSource.Close(); }
+            if (m_TraceEventSource != null)
+            {
+                m_TraceEventSource.StopProcessing();
+                m_TraceEventSource.Close();
+            }
         }
 
         public void AttachToProcessing()
         {
-            while (Running)
+            try
             {
-                try
-                {
-                    Running = m_TraceEventSource.Process();
-                }
-                catch
-                {
-                }
+                m_TraceEventSource.Process();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
             }
         }
     }

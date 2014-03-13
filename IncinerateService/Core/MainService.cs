@@ -62,7 +62,7 @@ namespace IncinerateService.Core
             m_Collector.ActionOccurred -= new Action<TraceEvent>(m_Collector_ActionOccurred);
             m_History.SnapshotReady -= new EventHandler<SnapshotReadyEventArgs>(m_History_SnapshotReady);
             m_Collector.Stop();
-            m_ProcessingThread.Interrupt();
+            //m_ProcessingThread.Interrupt();
         }
 
         private void m_History_SnapshotReady(object sender, SnapshotReadyEventArgs e)
