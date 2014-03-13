@@ -2267,7 +2267,7 @@ namespace Diagnostics.Eventing
                 if ((c < ' ' || c > '~') && !char.IsWhiteSpace(c))
                 {
                     str = str.Substring(0, i);
-                    Console.WriteLine("Warning: truncating " + (str.Length - i).ToString() + " non-ascii name characters: resulting string: " + str);
+                    //Console.WriteLine("Warning: truncating " + (str.Length - i).ToString() + " non-ascii name characters: resulting string: " + str);
                     break;
                 }
             }

@@ -2,13 +2,29 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Incinerate Client 0.1" Height="600" Width="700" WindowStartupLocation="CenterScreen"
-        Loaded="Window_Loaded">
+        Loaded="Window_Loaded" Icon="/IncinerateUI;component/FireIcon.png">
+    <Window.Resources>
+        <Style x:Key="Body_Content_DataGrid_Centering"
+        TargetType="{x:Type DataGridCell}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type DataGridCell}">
+                        <Grid Background="{TemplateBinding Background}">
+                            <ContentPresenter VerticalAlignment="Center" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
     <StackPanel >
-        <Button Content="Add Rule" Click="AddRule_Click"/>
-        <Button Content="Refresh" Click="Refresh_Click"/>
+        <Button Content="Add Rule" Click="AddRule_Click" Margin="5"/>
+        <Button Content="Refresh" Click="Refresh_Click" Margin="5"/>
         <DataGrid
-            Name="AgentGrid"
-            ItemsSource="{Binding Path=Agents, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" AutoGenerateColumns="False">
+            CellStyle="{StaticResource Body_Content_DataGrid_Centering}"
+            Name="AgentGrid" Margin="5"
+            ItemsSource="{Binding Path=Agents, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" AutoGenerateColumns="False"
+            HorizontalAlignment="Stretch">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Name}" Width="*" Header="Name">
                 </DataGridTextColumn>
@@ -17,7 +33,7 @@
                 <DataGridTemplateColumn Width="100">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Click="CmdButton_Click"
+                            <Button Click="CmdButton_Click" Margin="3"
                                     MouseRightButtonDown="CmdButton_MouseRightClick"
                                     Content="{Binding Path=AvailableCommand.Name}"/>
                         </DataTemplate>
@@ -26,7 +42,7 @@
                 <DataGridTemplateColumn Width="75">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Click="RemoveButton_Click" Content="Remove"/>
+                            <Button Click="RemoveButton_Click" Content="Remove" Margin="3"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

@@ -6,9 +6,9 @@
     <Grid>
         <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <TextBox Name="RuleNameTextBox" Focusable="True" Text="{Binding RuleName}"
-                     HorizontalAlignment="Stretch"/>
+                     HorizontalAlignment="Stretch" Margin="5"/>
             <DataGrid Height="200" ItemsSource="{Binding Path=Processes, Mode=TwoWay}"
-                      AutoGenerateColumns="False"
+                      AutoGenerateColumns="False" Margin="5"
                       CanUserAddRows="False">
                 <DataGrid.Columns>
                     <DataGridCheckBoxColumn Width="25" Binding="{Binding Selected}"/>
@@ -19,8 +19,8 @@
                 </DataGrid.Columns>
             </DataGrid>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Content="OK" Width="75" Click="OK_Click"/>
-                <Button Content="Cancel" Width="75" Click="Cancel_Click"/>
+                <Button Content="OK" Margin="5" Width="75" Click="OK_Click"/>
+                <Button Content="Cancel" Margin="5" Width="75" Click="Cancel_Click"/>
             </StackPanel>
         </StackPanel>
     </Grid>

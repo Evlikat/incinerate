@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Management;
 using NeuroIncinerate.Neuro;
+using System.Diagnostics;
 
 namespace IncinerateService.Core
 {
@@ -80,7 +81,7 @@ namespace IncinerateService.Core
     class GuardianAgentSession
     {
         public Agent Agent { get; private set; }
-        public string Process { get; private set; }
+        public string TargetProcess { get; private set; }
         public IStrategy RedStrategy { get; private set; }
         public IStrategy YellowStrategy { get; private set; }
         public double E1 { get; private set; }
@@ -96,7 +97,7 @@ namespace IncinerateService.Core
             IStrategy redStrategy, IStrategy yellowStrategy, double e1, double e2)
         {
             this.Agent = agent;
-            this.Process = process;
+            this.TargetProcess = process;
             this.RedStrategy = redStrategy;
             this.YellowStrategy = yellowStrategy;
             this.E1 = e1;
@@ -105,8 +106,28 @@ namespace IncinerateService.Core
 
         public void Start()
         {
-            startWatcher = WatchForProcessStart(Process);
-            endWatcher = WatchForProcessEnd(Process);
+            // Load existing processes
+            Process [] processes = Process.GetProcessesByName(TargetProcess);
+            lock (syncRoot)
+            {
+                foreach (Process p in processes)
+                {
+                    pids.Add(p.Id);
+                }
+            }
+
+            // Start watching for new instances
+            startWatcher = new ManagementEventWatcher("SELECT * FROM Win32_ProcessStartTrace");
+            endWatcher = new ManagementEventWatcher("SELECT * FROM Win32_ProcessStopTrace");
+
+            startWatcher.EventArrived += new EventArrivedEventHandler(ProcessStarted);
+            startWatcher.Start();
+
+            endWatcher.EventArrived += new EventArrivedEventHandler(ProcessEnded);
+            endWatcher.Start();
+
+            Console.WriteLine("Запуск режима охраны для {0}", TargetProcess);
+            Console.WriteLine("Наблюдаемые процессы: {0}", String.Join(", ", pids));
         }
 
         public void Stop()
@@ -120,61 +141,33 @@ namespace IncinerateService.Core
             return pids.Contains(pid);
         }
 
-        private ManagementEventWatcher WatchForProcessStart(string processName)
-        {
-            string queryString =
-                "SELECT TargetInstance" +
-                "  FROM __InstanceCreationEvent " +
-                "WITHIN  10 ";// +
-                //" WHERE TargetInstance ISA 'Win32_Process' " +
-                //"   AND TargetInstance.Name = '" + processName + "'";
-
-            // The dot in the scope means use the current machine
-            string scope = @"\\.\root\CIMV2";
-
-            // Create a watcher and listen for events
-            ManagementEventWatcher watcher = new ManagementEventWatcher(scope, queryString);
-            watcher.EventArrived += ProcessStarted;
-            watcher.Start();
-            return watcher;
-        }
-
-        private ManagementEventWatcher WatchForProcessEnd(string processName)
-        {
-            string queryString =
-                "SELECT TargetInstance" +
-                "  FROM __InstanceDeletionEvent " +
-                "WITHIN  10 ";// +
-                //" WHERE TargetInstance ISA 'Win32_Process' "; +
-                //"   AND TargetInstance.Name = '" + processName + "'";
-
-            // The dot in the scope means use the current machine
-            string scope = @"\\.\root\CIMV2";
-
-            // Create a watcher and listen for events
-            ManagementEventWatcher watcher = new ManagementEventWatcher(scope, queryString);
-            watcher.EventArrived += ProcessEnded;
-            watcher.Start();
-            return watcher;
-        }
-
         private void ProcessStarted(object sender, EventArrivedEventArgs e)
         {
-            ManagementBaseObject targetInstance = (ManagementBaseObject)e.NewEvent.
-                Properties["TargetInstance"].Value;
-            lock (syncRoot)
+            string name = e.NewEvent.Properties["ProcessName"].Value.ToString();
+            if (String.Compare(name, TargetProcess) == 0 || String.Compare(name, TargetProcess + ".exe") == 0)
             {
-                pids.Add((int) targetInstance.Properties["Name"].Value);
+                uint id = (uint)e.NewEvent.Properties["ProcessID"].Value;
+                lock (syncRoot)
+                {
+                    pids.Add((int)id);
+                    Console.WriteLine("Обнаружен запуск целевого процесса: {0} [{1}]", name, id);
+                    Console.WriteLine("Наблюдаемые процессы: {0}", String.Join(", ", pids));
+                }
             }
         }
 
         private void ProcessEnded(object sender, EventArrivedEventArgs e)
         {
-            ManagementBaseObject targetInstance = (ManagementBaseObject)e.NewEvent.
-                Properties["TargetInstance"].Value;
-            lock (syncRoot)
+            string name = e.NewEvent.Properties["ProcessName"].Value.ToString();
+            if (name != null && name.Contains(TargetProcess))
             {
-                pids.Remove((int) targetInstance.Properties["Name"].Value);
+                uint id = (uint)e.NewEvent.Properties["ProcessID"].Value;
+                lock (syncRoot)
+                {
+                    pids.Remove((int)id);
+                    Console.WriteLine("Целевой процесс завершен: {0} [{1}]", name, id);
+                    Console.WriteLine("Наблюдаемые процессы: {0}", String.Join(", ", pids));
+                }
             }
         }
     }
