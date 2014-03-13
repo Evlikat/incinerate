@@ -13,11 +13,14 @@ using System.ServiceModel;
 using System.ServiceModel.Description;
 using IncinerateService.API;
 using System.ServiceModel.Channels;
+using NLog;
 
 namespace IncinerateService
 {
     public class Service : ServiceBase
     {
+        private static Logger Logger = LogManager.GetCurrentClassLogger();
+
         const string ServiceID = "Incinerator";
         Thread m_WorkerThread;
         bool m_Disposed = false;
@@ -57,25 +60,25 @@ namespace IncinerateService
                     }
                     else if (args.Install && !args.Uninstall && !args.Service)
                     {
-                        Console.WriteLine("Installing service...");
+                        Logger.Info("Installing service...");
                         int errorCode = Service.InstallService();
                         if (errorCode == 0)
-                            Console.WriteLine(ServiceID + " service successfully installed");
+                            Logger.Info(ServiceID + " service successfully installed");
                         else
-                            Console.WriteLine(ServiceID + " service installation failed (error {0})", errorCode);
+                            Logger.Info(ServiceID + " service installation failed (error {0})", errorCode);
                     }
                     else if (args.Uninstall && !args.Install && !args.Service)
                     {
-                        Console.WriteLine("Uninstalling service...");
+                        Logger.Info("Uninstalling service...");
                         int errorCode = Service.UninstallService();
                         if (errorCode == 0)
-                            Console.WriteLine(ServiceID + " service successfully uninstalled");
+                            Logger.Info(ServiceID + " service successfully uninstalled");
                         else
-                            Console.WriteLine(ServiceID + " service uninstall failed (error {0})", errorCode);
+                            Logger.Info(ServiceID + " service uninstall failed (error {0})", errorCode);
                     }
                     else
                     {
-                        Console.WriteLine("Invalid command line arguments");
+                        Logger.Info("Invalid command line arguments");
                         args.PrintUsage();
                     }
                 }
@@ -160,7 +163,7 @@ namespace IncinerateService
         {
             Console.TreatControlCAsInput = true;
             Console.Title = ServiceID;
-            Console.WriteLine("Running as console application. Press Enter to exit");
+            Logger.Info("Running as console application. Press Enter to exit");
             OnStart(null);
             while (Console.ReadKey(true).Key != ConsoleKey.Enter) ;
             StopApplication();
@@ -187,14 +190,14 @@ namespace IncinerateService
                             ServiceHost host = new ServiceHost(service);
                             host.AddServiceEndpoint(typeof(IIncinerateService), binding, "net.pipe://IncinerateService/incinerate");
                             host.Open();
-                            Console.WriteLine("Server Started");
+                            Logger.Info("Server Started");
                             m_ExitSignal.WaitOne();
                             host.Close();
                         }
                     }
                     catch (Exception e)
                     {
-                        Console.WriteLine(e);
+                        Logger.Error(e);
                         if (m_IsService)
                             Stop();
                     }
@@ -204,7 +207,9 @@ namespace IncinerateService
                     }
                 }
                 else
-                    Console.WriteLine("Cannot run multiple instances of " + ServiceID);
+                {
+                    Logger.Info("Cannot run multiple instances of " + ServiceID);
+                }
             }
         }
 

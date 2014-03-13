@@ -4,11 +4,14 @@ using System.Linq;
 using System.Text;
 using NeuroIncinerate;
 using NeuroIncinerate.Neuro;
+using NLog;
 
 namespace IncinerateService.Core
 {
     class LearningAgent
     {
+        private static Logger Log = LogManager.GetCurrentClassLogger();
+
         public const int MinPositiveTrained = 1000;
         public const int MinNegativeTrained = 2500;
         enum State
@@ -55,7 +58,7 @@ namespace IncinerateService.Core
                 m_PositiveTrained++;
                 if (m_PositiveTrained % 100 == 0)
                 {
-                    Console.WriteLine("Trained + {0}", m_PositiveTrained);
+                    Log.Info("Обучено \"своих\" {0}", m_PositiveTrained);
                 }
             }
             else
@@ -63,7 +66,7 @@ namespace IncinerateService.Core
                 m_NegativeTrained++;
                 if (m_NegativeTrained % 100 == 0)
                 {
-                    Console.WriteLine("Trained - {0}", m_NegativeTrained);
+                    Log.Info("Обучено \"чужих\" {0}", m_NegativeTrained);
                 }
             }
             if (m_PositiveTrained >= m_MinPositive && m_NegativeTrained >= m_MinNegative)

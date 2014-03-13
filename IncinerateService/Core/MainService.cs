@@ -11,6 +11,7 @@ using System.ServiceModel;
 using System.Diagnostics;
 using System.Threading;
 using IncinerateService.Core;
+using NLog;
 
 namespace IncinerateService.Core
 {
@@ -21,13 +22,15 @@ namespace IncinerateService.Core
 #endif
     public class MainService : IIncinerateService, IDisposable
     {
+        private static Logger Log = LogManager.GetCurrentClassLogger();
+
         Dictionary<string, IStrategy> Strategies = new Dictionary<string, IStrategy>()
         {
-            { "alert", new AlertStrategy()},
-            { "alarm", new AlarmStrategy()},
-            { "warning", new AlarmStrategy()},
-            { "terminate", new HitTerminateStrategy(1)},
-            { "terminate10", new HitTerminateStrategy(10)}
+            { "alert", new AlertStrategy(Log)},
+            { "alarm", new AlarmStrategy(Log)},
+            { "warning", new AlarmStrategy(Log)},
+            { "terminate", new HitTerminateStrategy(1, Log)},
+            { "terminate10", new HitTerminateStrategy(10, Log)}
         };
         ProcessEventCollector m_Collector = new ProcessEventCollector();
         GlobalHistory m_History = new GlobalHistory();
@@ -69,9 +72,9 @@ namespace IncinerateService.Core
             {
                 foreach (Agent agent in newAgents)
                 {
-                    Console.WriteLine("Agent {0} has been learned", agent.Name);
+                    Log.Info("Агент {0} успешно обучен", agent.Name);
                     m_AgentStorage.SaveAgent(agent.Name, agent);
-                    Console.WriteLine("Agent has been saved: {0}", agent.Name);
+                    Log.Info("Агент сохранен: {0}", agent.Name);
                     m_AgentRegistry.StopLearning(agent.Name);
                 }
             }
@@ -118,7 +121,7 @@ namespace IncinerateService.Core
         {
             if (m_AgentRegistry.StopGuard(name))
             {
-                Console.WriteLine("Agent {0} guardian has been stopped", name);
+                Console.WriteLine("Страж {0} остановлен", name);
             }
         }
 
@@ -128,7 +131,7 @@ namespace IncinerateService.Core
             {
                 return Strategies[strategyName];
             }
-            return new DoNothingStrategy();
+            return new DoNothingStrategy(Log);
         }
 
         private void StartLearning(LearningConfig learningConfig)
@@ -138,7 +141,7 @@ namespace IncinerateService.Core
 
         public void AddLearningAgent(IList<int> pids, string name)
         {
-            Console.WriteLine("AddLearningAgent: {0}", name);
+            Log.Info("AddLearningAgent: {0}", name);
             Process[] processes = Process.GetProcesses();
             ISet<IPID> nativePids = new SortedSet<IPID>();
             ISet<IPID> foreignPids = new SortedSet<IPID>();
@@ -159,7 +162,7 @@ namespace IncinerateService.Core
 
         public IList<AgentInfo> GetAgents()
         {
-            Console.WriteLine("GetAgents");
+            Log.Info("GetAgents");
             IList<AgentInfo> response = new List<AgentInfo>();
 
             ICollection<LearningAgent> learningAgents = m_AgentRegistry.GetLearningAgents();
@@ -196,11 +199,11 @@ namespace IncinerateService.Core
             try
             {
                 StartWatching(name, strategyRed, strategyYellow, p1, p2);
-                Console.WriteLine("Watch: {0} ({1}, {2}) [{3:0.00}, {4:0.00}]", name, strategyRed, strategyYellow, p1, p2);
+                Log.Info("Watch: {0} ({1}, {2}) [{3:0.00}, {4:0.00}]", name, strategyRed, strategyYellow, p1, p2);
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex);
+                Log.Error(ex);
             }
         }
 
@@ -210,12 +213,12 @@ namespace IncinerateService.Core
             try
             {
                 StartGuard(name, process, strategyRed, strategyYellow, e1, e2);
-                Console.WriteLine("Guard: {0} - {1} ({2}, {3}) [{4:0.00}, {5:0.00}]",
+                Log.Info("Guard: {0} - {1} ({2}, {3}) [{4:0.00}, {5:0.00}]",
                     name, process, strategyRed, strategyYellow, e1, e2);
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex);
+                Log.Error(ex);
             }
         }
 
@@ -227,7 +230,7 @@ namespace IncinerateService.Core
         {
             if (m_AgentRegistry.StopLearning(name))
             {
-                Console.WriteLine("Agent {0} learning has been stopped", name);
+                Log.Info("Обучение агента {0} остановлено", name);
             }
         }
 
@@ -235,7 +238,7 @@ namespace IncinerateService.Core
         {
             if (m_AgentRegistry.StopWatch(name))
             {
-                Console.WriteLine("Agent {0} watching has been stopped", name);
+                Log.Info("Режим наблюдения агента {0} был остановлен", name);
             }
         }
     }

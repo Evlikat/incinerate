@@ -88,6 +88,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\bin\AForge.Neuro.dll</HintPath>
     </Reference>
+    <Reference Include="NLog">
+      <HintPath>..\bin\NLog.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Management" />
@@ -134,6 +137,11 @@
       <Project>{B68F4968-A7CF-41CC-AD6E-373DB5E67944}</Project>
       <Name>TraceEvent</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="NLog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Diagnostics;
+using NLog;
 
 namespace IncinerateService.Core
 {
@@ -11,34 +12,52 @@ namespace IncinerateService.Core
         void Apply(double res, int pid);
     }
 
-    class DoNothingStrategy : IStrategy
+    abstract class AbstractStrategy : IStrategy
     {
-        public void Apply(double res, int pid) { }
+        protected Logger Log;
+
+        public AbstractStrategy(Logger log)
+        {
+            this.Log = log;
+        }
+
+        public abstract void Apply(double res, int pid);
     }
 
-    class AlertStrategy : IStrategy
+    class DoNothingStrategy : AbstractStrategy
     {
-        public void Apply(double res, int pid)
+        public DoNothingStrategy(Logger log) : base(log) { }
+
+        public override void Apply(double res, int pid) { }
+    }
+
+    class AlertStrategy : AbstractStrategy
+    {
+        public AlertStrategy(Logger log) : base(log) { }
+
+        public override void Apply(double res, int pid)
         {
-            Console.WriteLine("Обнаружен запрещенный процесс: {0} [{1:0.000000}]", pid, res);
+            Log.Info("Обнаружен запрещенный процесс: {0} [{1:0.000000}]", pid, res);
         }
     }
 
-    class AlarmStrategy : IStrategy
+    class AlarmStrategy : AbstractStrategy
     {
-        public void Apply(double res, int pid)
+        public AlarmStrategy(Logger log) : base(log) { }
+
+        public override void Apply(double res, int pid)
         {
-            Console.WriteLine("Зафиксирована аномальная активность для: {0} [{1:0.000000}]", pid, res);
+            Log.Info("Зафиксирована аномальная активность для: {0} [{1:0.000000}]", pid, res);
         }
     }
 
-    class HitTerminateStrategy : IStrategy
+    class HitTerminateStrategy : AbstractStrategy
     {
-        object m_Sync;
+        object m_Sync = new object();
         int hits = 0;
         int m_MaxHits;
 
-        public HitTerminateStrategy(int max)
+        public HitTerminateStrategy(int max, Logger log) : base(log)
         {
             if (max < 1)
             {
@@ -47,7 +66,7 @@ namespace IncinerateService.Core
             m_MaxHits = max;
         }
 
-        public void Apply(double res, int pid)
+        public override void Apply(double res, int pid)
         {
             lock (m_Sync)
             {

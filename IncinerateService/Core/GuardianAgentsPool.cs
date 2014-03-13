@@ -5,11 +5,14 @@ using System.Text;
 using System.Management;
 using NeuroIncinerate.Neuro;
 using System.Diagnostics;
+using NLog;
 
 namespace IncinerateService.Core
 {
     class GuardianAgentsPool : IGuardianAgentsPool
     {
+        private static Logger Log = LogManager.GetCurrentClassLogger();
+
         object syncRoot = new object();
         IDictionary<Agent, GuardianAgentSession> m_Agents = new Dictionary<Agent, GuardianAgentSession>();
 
@@ -80,6 +83,8 @@ namespace IncinerateService.Core
 
     class GuardianAgentSession
     {
+        private static Logger Log = LogManager.GetCurrentClassLogger();
+
         public Agent Agent { get; private set; }
         public string TargetProcess { get; private set; }
         public IStrategy RedStrategy { get; private set; }
@@ -126,8 +131,8 @@ namespace IncinerateService.Core
             endWatcher.EventArrived += new EventArrivedEventHandler(ProcessEnded);
             endWatcher.Start();
 
-            Console.WriteLine("Запуск режима охраны для {0}", TargetProcess);
-            Console.WriteLine("Наблюдаемые процессы: {0}", String.Join(", ", pids));
+            Log.Info("Запуск режима охраны для {0}", TargetProcess);
+            Log.Info("Наблюдаемые процессы: {0}", String.Join(", ", pids));
         }
 
         public void Stop()
@@ -150,8 +155,8 @@ namespace IncinerateService.Core
                 lock (syncRoot)
                 {
                     pids.Add((int)id);
-                    Console.WriteLine("Обнаружен запуск целевого процесса: {0} [{1}]", name, id);
-                    Console.WriteLine("Наблюдаемые процессы: {0}", String.Join(", ", pids));
+                    Log.Info("Обнаружен запуск целевого процесса: {0} [{1}]", name, id);
+                    Log.Info("Наблюдаемые процессы: {0}", String.Join(", ", pids));
                 }
             }
         }
@@ -165,8 +170,8 @@ namespace IncinerateService.Core
                 lock (syncRoot)
                 {
                     pids.Remove((int)id);
-                    Console.WriteLine("Целевой процесс завершен: {0} [{1}]", name, id);
-                    Console.WriteLine("Наблюдаемые процессы: {0}", String.Join(", ", pids));
+                    Log.Info("Целевой процесс завершен: {0} [{1}]", name, id);
+                    Log.Info("Наблюдаемые процессы: {0}", String.Join(", ", pids));
                 }
             }
         }
