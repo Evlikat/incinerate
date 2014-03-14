@@ -42,6 +42,7 @@ namespace NeuroIncinerate.Neuro
 
         private KernelTraceEventParser.Keywords GetKeyEvents()
         {
+            //return KernelTraceEventParser.Keywords.Default;
             return KernelTraceEventParser.Keywords.DiskFileIO | 
                 KernelTraceEventParser.Keywords.NetworkTCPIP |
                 KernelTraceEventParser.Keywords.ProcessCounters |
@@ -50,6 +51,7 @@ namespace NeuroIncinerate.Neuro
                 KernelTraceEventParser.Keywords.SplitIO |
                 KernelTraceEventParser.Keywords.Driver |
                 KernelTraceEventParser.Keywords.FileIO |
+                KernelTraceEventParser.Keywords.Profile |
                 KernelTraceEventParser.Keywords.Registry;
         }
 

@@ -33,6 +33,7 @@ namespace NeuroIncinerate.Neuro.Multi
         public Significator()
         {
             EventTypeList = new List<Type>();
+            EventTypeList.Add(typeof(SignificantProfileEvent));
             EventTypeList.Add(typeof(SignificantNetworkEvent));
             EventTypeList.Add(typeof(SignificantDiskIoEvent));
             EventTypeList.Add(typeof(SignificantRegistryEvent));
@@ -121,6 +122,19 @@ namespace NeuroIncinerate.Neuro.Multi
             EventTypeDict.Add("UdpIpFail", new EnumInfo(typeof(SignificantNetworkEvent), SignificantNetworkEvent.NetNonSignificant.ToString()));
             EventTypeDict.Add("UdpIpSendIPV6", new EnumInfo(typeof(SignificantNetworkEvent), SignificantNetworkEvent.NetSend.ToString()));
             EventTypeDict.Add("UdpIpRecvIPV6", new EnumInfo(typeof(SignificantNetworkEvent), SignificantNetworkEvent.NetRecv.ToString()));
+
+            EventTypeDict.Add("PerfInfoSampleProf", new EnumInfo(typeof(SignificantProfileEvent), SignificantProfileEvent.PerfInfoSampleProf.ToString()));
+            EventTypeDict.Add("PerfInfoBatchedSampleProf", new EnumInfo(typeof(SignificantProfileEvent), SignificantProfileEvent.PerfInfoSampleProf.ToString()));
+            EventTypeDict.Add("PerfInfoSetInterval", new EnumInfo(typeof(SignificantProfileEvent), SignificantProfileEvent.PerfInfoSetInterval.ToString()));
+            EventTypeDict.Add("PerfInfoCollectionStart", new EnumInfo(typeof(SignificantProfileEvent), SignificantProfileEvent.PerfInfoCollection.ToString()));
+            EventTypeDict.Add("PerfInfoCollectionEnd", new EnumInfo(typeof(SignificantProfileEvent), SignificantProfileEvent.PerfInfoCollection.ToString()));
+            EventTypeDict.Add("PerfInfoSysClEnter", new EnumInfo(typeof(SignificantProfileEvent), SignificantProfileEvent.PerfInfoSysCl.ToString()));
+            EventTypeDict.Add("PerfInfoSysClExit", new EnumInfo(typeof(SignificantProfileEvent), SignificantProfileEvent.PerfInfoSysCl.ToString()));
+            EventTypeDict.Add("PerfInfoISR", new EnumInfo(typeof(SignificantProfileEvent), SignificantProfileEvent.PerfInfoISR.ToString()));
+            EventTypeDict.Add("PerfInfoThreadedDPC", new EnumInfo(typeof(SignificantProfileEvent), SignificantProfileEvent.PerfInfoDPC.ToString()));
+            EventTypeDict.Add("PerfInfoDPC", new EnumInfo(typeof(SignificantProfileEvent), SignificantProfileEvent.PerfInfoDPC.ToString()));
+            EventTypeDict.Add("PerfInfoTimerDPC", new EnumInfo(typeof(SignificantProfileEvent), SignificantProfileEvent.PerfInfoDPC.ToString()));
+            EventTypeDict.Add("PerfInfoDebuggerEnabled", new EnumInfo(typeof(SignificantProfileEvent), SignificantProfileEvent.PerfInfoNonSignificant.ToString()));
         }
 
         public string ToSignificant(string eventName)

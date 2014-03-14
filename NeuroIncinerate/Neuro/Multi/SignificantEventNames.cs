@@ -37,4 +37,15 @@ namespace NeuroIncinerate.Neuro.Multi
         FileIoDelete,
         FileIoNonSignificant
     }
+
+    public enum SignificantProfileEvent : int
+    {
+        PerfInfoSampleProf = 0,
+        PerfInfoSetInterval,
+        PerfInfoCollection,
+        PerfInfoSysCl,
+        PerfInfoISR,
+        PerfInfoDPC,
+        PerfInfoNonSignificant
+    }
 }
