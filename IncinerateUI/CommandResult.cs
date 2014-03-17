@@ -18,4 +18,9 @@ namespace IncinerateUI
     {
         public IList<AgentInfo> AgentInfos { get; set; }
     }
+
+    class GetStatResult : CommandResult
+    {
+        public IList<ProcessStatInfo> ProcessStats { get; set; }
+    }
 }

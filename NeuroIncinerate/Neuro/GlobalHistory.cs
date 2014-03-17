@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Diagnostics;
 
 namespace NeuroIncinerate.Neuro
 {
@@ -21,9 +22,26 @@ namespace NeuroIncinerate.Neuro
             IProcessHistory processHistory;
             if (!m_History.ContainsKey(processID))
             {
-                processHistory = m_ProcessHistoryFactory.CreateProcessHistory(processID);
+                string name;
+                if (String.IsNullOrEmpty(processID.Name))
+                {
+                    try
+                    {
+                        name = Process.GetProcessById(processID.PID).ProcessName;
+                    }
+                    catch (Exception ex)
+                    {
+                        name = "UNKNOWN";
+                    }
+                }
+                else
+                {
+                    name = processID.Name;
+                }
+                IPID pid = new WinPID(processID.PID, name);
+                processHistory = m_ProcessHistoryFactory.CreateProcessHistory(pid);
                 processHistory.SnapshotReady += new EventHandler<SnapshotReadyEventArgs>(ProcessHistory_SnapshotReady);
-                m_History.Add(processID, processHistory);
+                m_History.Add(pid, processHistory);
             }
             else
             {

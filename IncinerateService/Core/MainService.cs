@@ -242,5 +242,23 @@ namespace IncinerateService.Core
                 Log.Info("Режим наблюдения агента {0} был остановлен", name);
             }
         }
+
+        public IList<ProcessStatInfo> GetProcessStats()
+        {
+            IList<ProcessStatInfo> infos = new List<ProcessStatInfo>();
+            foreach (IPID pid in m_History.ActivePIDs)
+            {
+                IProcessHistory history = m_History[pid];
+                infos.Add(new ProcessStatInfo()
+                {
+                    Name = pid.Name,
+                    PID = pid.PID,
+                    DiskFileActivity = history.DiskFileActivity,
+                    NetActivity = history.NetActivity,
+                    RegistryActivity = history.RegistryActivity
+                });
+            }
+            return infos;
+        }
     }
 }

@@ -157,5 +157,11 @@ namespace IncinerateUI
         {
             RefreshAgentList();
         }
+
+        private void OpenTaskManager_Click(object sender, RoutedEventArgs e)
+        {
+            DynamicTaskManagerDialog dlg = new DynamicTaskManagerDialog(m_Client);         
+            dlg.Show();
+        }
     }
 }

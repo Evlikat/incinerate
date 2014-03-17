@@ -32,5 +32,8 @@ namespace IncinerateService.API
 
         [OperationContract]
         void Stop();
+
+        [OperationContract]
+        IList<ProcessStatInfo> GetProcessStats();
     }
 }

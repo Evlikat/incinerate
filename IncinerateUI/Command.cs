@@ -152,4 +152,17 @@ namespace IncinerateUI
             return new NoResult();
         }
     }
+
+    class GetProcessStats : AgentCommand
+    {
+        public GetProcessStats()
+        {
+            Name = "Get Process Statistics";
+        }
+
+        public override CommandResult Execute(IIncinerateService service)
+        {
+            return new GetStatResult() { ProcessStats = service.GetProcessStats() };
+        }
+    }
 }

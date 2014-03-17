@@ -17,7 +17,7 @@ namespace IncinerateUI
 {
     public partial class LearnSelectDialog : Window
     {
-        public LearnSelectDialogSettings Settings { get; private set; } 
+        internal LearnSelectDialogSettings Settings { get; private set; } 
 
         public LearnSelectDialog()
         {
@@ -57,7 +57,7 @@ namespace IncinerateUI
         }
     }
 
-    public class LearnSelectDialogSettings
+    internal class LearnSelectDialogSettings
     {
         public ObservableCollection<ProcessInfo> Processes { get; set; }
         public string RuleName { get; set; }
@@ -70,7 +70,7 @@ namespace IncinerateUI
         }
     }
 
-    public class ProcessInfo
+    internal class ProcessInfo
     {
         public bool Selected { get; set; }
         public string Name { get; set; }

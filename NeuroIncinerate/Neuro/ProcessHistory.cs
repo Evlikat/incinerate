@@ -16,6 +16,12 @@ namespace NeuroIncinerate.Neuro
         int Length { get; }
 
         long TotalAdded { get; }
+
+        int DiskFileActivity { get; }
+
+        int NetActivity { get; }
+
+        int RegistryActivity { get; }
     }
 
     public class SnapshotReadyEventArgs : EventArgs
@@ -38,15 +44,24 @@ namespace NeuroIncinerate.Neuro
         private int m_Current = 0;
         private long m_TotalAdded = 0L;
 
+        public int DiskFileActivity { get; private set; }
+        public int NetActivity { get; private set; }
+        public int RegistryActivity { get; private set; }
+
         public LimitedProcessHistory(IPID processID, int limit)
         {
             this.m_ProcessID = processID;
             this.m_Limit = limit;
             this.m_List = new IProcessAction[limit];
+
+            this.DiskFileActivity = 0;
+            this.NetActivity = 0;
+            this.RegistryActivity = 0;
         }
 
         public void Add(IProcessAction action)
         {
+            UpdateStats(action);
             m_List[m_Current] = action;
             m_Current = (m_Current + 1) % m_Limit;
             m_TotalAdded++;
@@ -54,6 +69,22 @@ namespace NeuroIncinerate.Neuro
             {
                 if (SnapshotReady != null)
                     SnapshotReady(this, new SnapshotReadyEventArgs(m_List, m_ProcessID));
+            }
+        }
+
+        public void UpdateStats(IProcessAction action)
+        {
+            if (action.EventName.StartsWith("DiskIo") || action.EventName.StartsWith("FileIo"))
+            {
+                DiskFileActivity++;
+            }
+            else if (action.EventName.StartsWith("TcpIp") || action.EventName.StartsWith("UdpIp"))
+            {
+                NetActivity++;
+            }
+            else if (action.EventName.StartsWith("Registry"))
+            {
+                RegistryActivity++;
             }
         }
 

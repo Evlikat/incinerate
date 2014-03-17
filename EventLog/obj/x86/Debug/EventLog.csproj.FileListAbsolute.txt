@@ -1,6 +1,0 @@
-C:\GLOBAL DATA\Projects\incinerate\EventLog\bin\Debug\EventLog.exe
-C:\GLOBAL DATA\Projects\incinerate\EventLog\bin\Debug\EventLog.pdb
-C:\GLOBAL DATA\Projects\incinerate\EventLog\obj\x86\Debug\EventLog.exe
-C:\GLOBAL DATA\Projects\incinerate\EventLog\obj\x86\Debug\EventLog.pdb
-C:\GLOBAL DATA\Projects\incinerate\EventLog\bin\Debug\AForge.dll
-C:\GLOBAL DATA\Projects\incinerate\EventLog\bin\Debug\AForge.Neuro.dll

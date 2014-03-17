@@ -56,12 +56,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DynamicTaskManagerDialog.xaml.cs">
+      <DependentUpon>DynamicTaskManagerDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GuardParametersDialog.xaml.cs">
       <DependentUpon>GuardParametersDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="WatchParametersDialog.xaml.cs">
       <DependentUpon>WatchParametersDialog.xaml</DependentUpon>
     </Compile>
+    <Page Include="DynamicTaskManagerDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="GuardParametersDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

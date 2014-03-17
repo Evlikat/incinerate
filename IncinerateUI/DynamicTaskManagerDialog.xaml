@@ -1,0 +1,43 @@
+﻿<Window x:Class="IncinerateUI.DynamicTaskManagerDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="DynamicTaskManager" Height="700" Width="700">
+    <Window.Resources>
+        <Style x:Key="Body_Content_DataGrid_Centering"
+        TargetType="{x:Type DataGridCell}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type DataGridCell}">
+                        <Grid Background="{TemplateBinding Background}">
+                            <ContentPresenter VerticalAlignment="Center" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <StackPanel >
+        <Button Content="Refresh List" Click="Refresh_Click" Margin="5"/>
+        <DataGrid
+                CellStyle="{StaticResource Body_Content_DataGrid_Centering}"
+                Name="ProcessGrid" Margin="5"
+                ItemsSource="{Binding Path=ProcessStats, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" AutoGenerateColumns="False"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                MaxHeight="500">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Name}" Header="Process Name" Width="*">
+                </DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding PID}" Header="Process ID" Width="75">
+                </DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding DiskFileActivity}" Header="Disk File" Width="75">
+                </DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding NetActivity}" Header="Net" Width="75">
+                </DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding RegistryActivity}" Header="Registry" Width="75">
+                </DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Content="End Process" Click="EndProcess_Click" Margin="5"/>
+    </StackPanel>
+</Window>
