@@ -10,6 +10,7 @@ namespace NeuroIncinerate.Neuro
     public interface IProcessAction
     {
         string EventName { get; }
+        AffectedKeys AffectedKeys { get; }
     }
 
     [Serializable]
@@ -20,13 +21,8 @@ namespace NeuroIncinerate.Neuro
             EventName = traceEvent.EventName;
             OpcodeName = traceEvent.OpcodeName;
             PayloadNames = traceEvent.PayloadNames;
-            PointerSize = traceEvent.PointerSize;
-            ProcessorNumber = traceEvent.ProcessorNumber;
-            ProviderGuid = traceEvent.ProviderGuid;
-            ProviderName = traceEvent.ProviderName;
-            TaskName = traceEvent.TaskName;
-            ThreadID = traceEvent.ThreadID;
-            TimeStamp = traceEvent.TimeStamp;
+            //
+            AffectedKeys = new AffectedKeys(traceEvent);
         }
 
         public override string ToString()
@@ -37,12 +33,7 @@ namespace NeuroIncinerate.Neuro
         public string EventName { get; set; }
         public string OpcodeName { get; set; }
         public string[] PayloadNames { get; set; }
-        public int PointerSize { get; set; }
-        public int ProcessorNumber { get; set; }
-        public Guid ProviderGuid { get; set; }
-        public string ProviderName { get; set; }
-        public string TaskName { get; set; }
-        public int ThreadID { get; set; }
-        public DateTime TimeStamp { get; set; }
+        //
+        public AffectedKeys AffectedKeys { get; private set; }
     }
 }

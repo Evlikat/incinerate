@@ -12,7 +12,7 @@ namespace NeuroIncinerate.Neuro
 
     class ProcessHistoryFactory : IProcessHistoryFactory
     {
-        public const int Limit = 20;
+        public const int Limit = 50;
 
         public IProcessHistory CreateProcessHistory(IPID processID)
         {

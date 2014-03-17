@@ -67,6 +67,7 @@ namespace IncinerateService.Core
 
         private void m_History_SnapshotReady(object sender, SnapshotReadyEventArgs e)
         {
+            //new HistorySnapshot(e);
             ICollection<Agent> newAgents = m_AgentRegistry.Handle(e.PID, e.Events);
             if (newAgents.Count > 0)
             {

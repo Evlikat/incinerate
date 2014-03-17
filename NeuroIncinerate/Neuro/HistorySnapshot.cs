@@ -22,17 +22,32 @@ namespace NeuroIncinerate.Neuro
 
         public string ProcessName { private get; set; }
 
+        public AffectedKeys AffectedKeys
+        {
+            get
+            {
+                AffectedKeys keys = new AffectedKeys();
+                foreach (IProcessAction action in Events)
+                {
+                    keys.UnionWith(action.AffectedKeys);
+                }
+                return keys;
+            }
+        }
+
         public HistorySnapshot()
         {
         }
 
         public HistorySnapshot(SnapshotReadyEventArgs args)
+            : this()
         {
             Events = args.Events;
             PID = args.PID;
         }
 
         public HistorySnapshot(IPID pid, IList<IProcessAction> list)
+            : this()
         {
             PID = pid;
             Events = list;

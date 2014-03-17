@@ -27,9 +27,7 @@ namespace NeuroIncinerate.Neuro
                 m_TraceEventSession.EnableKernelProvider(GetKeyEvents());
 
                 m_TraceEventSource = new ETWTraceEventSource(SessionName, TraceEventSourceType.Session);
-                //m_TraceEventSource.Kernel.All += new Action<TraceEvent>(Kernel_All);
-
-                m_TraceEventSource.Kernel.All += new Action<TraceEvent>(Kernel_All);                
+                m_TraceEventSource.Kernel.All += new Action<TraceEvent>(Kernel_All);
 
                 Running = true;
             }
@@ -51,13 +49,12 @@ namespace NeuroIncinerate.Neuro
                 KernelTraceEventParser.Keywords.SplitIO |
                 KernelTraceEventParser.Keywords.Driver |
                 KernelTraceEventParser.Keywords.FileIO |
-                KernelTraceEventParser.Keywords.Profile |
                 KernelTraceEventParser.Keywords.Registry;
         }
 
         private unsafe void Kernel_All(TraceEvent obj)
         {
-            if (ActionOccurred != null)
+            if (ActionOccurred != null && obj.ProcessID > 0)
             {
                 ActionOccurred(obj);
             }

@@ -22,6 +22,8 @@ namespace NeuroIncinerate.Neuro.Multi
         public INetworkTrustRegistry TrustVector { get; set; }
         public string TargetProcessName { get; private set; }
 
+        public AffectedKeys LearnedAffectedKeys { get; private set; }
+
         public MultiActivationNetwork(string targetProcessName)
         {
             TargetProcessName = targetProcessName;
@@ -30,6 +32,7 @@ namespace NeuroIncinerate.Neuro.Multi
             TrustVector = new UniformNetworkTrustVector(EventTypeList.Count);
             NetworkMap = new Dictionary<Type, ActivationNetwork>();
             m_TrainerMap = new Dictionary<Type, BackPropagationLearning>();
+            LearnedAffectedKeys = new AffectedKeys();
             
             foreach (Type type in EventTypeList)
             {
@@ -48,7 +51,16 @@ namespace NeuroIncinerate.Neuro.Multi
 
         public void RunTrain(HistorySnapshot snapshot, bool isTargetProcess)
         {
-            IDictionary<Type, TypedLearningPair> learningDict = GetPairs(snapshot, isTargetProcess);
+            IDictionary<Type, TypedLearningPair> learningDict;
+            if (isTargetProcess)
+            {
+                learningDict = GetPositivePairs(snapshot);
+                LearnedAffectedKeys.UnionWith(snapshot.AffectedKeys);
+            }
+            else
+            {
+                learningDict = GetNegativePairs(snapshot);
+            }
             foreach (KeyValuePair<Type, TypedLearningPair> typePairPair in learningDict)
             {
                 TrainerMap[typePairPair.Key].Run(typePairPair.Value.Input, typePairPair.Value.Output);
@@ -69,7 +81,7 @@ namespace NeuroIncinerate.Neuro.Multi
             return new MultiNetworkComputationResult(results, TrustVector);
         }
 
-        private IDictionary<Type, TypedLearningPair> GetPairs(HistorySnapshot snapshot, bool isTargetProcess)
+        private IDictionary<Type, TypedLearningPair> GetPositivePairs(HistorySnapshot snapshot)
         {
             IDictionary<Type, TypedLearningPair> learningDict = new Dictionary<Type, TypedLearningPair>();
             foreach (IProcessAction action in snapshot.Events)
@@ -81,7 +93,7 @@ namespace NeuroIncinerate.Neuro.Multi
                 TypedLearningPair pair;
                 if (!learningDict.ContainsKey(type))
                 {
-                    pair = new TypedLearningPair(type, isTargetProcess);
+                    pair = new TypedLearningPair(type, true);
                     learningDict.Add(type, pair);
                 }
                 else
@@ -89,6 +101,34 @@ namespace NeuroIncinerate.Neuro.Multi
                     pair = learningDict[type];
                 }
                 pair.Modify(Significator.ToSignificant(action.EventName));
+            }
+            return learningDict;
+        }
+
+        private IDictionary<Type, TypedLearningPair> GetNegativePairs(HistorySnapshot snapshot)
+        {
+            IDictionary<Type, TypedLearningPair> learningDict = new Dictionary<Type, TypedLearningPair>();
+            int count = snapshot.Events.Count;
+            int types = Enum.GetNames(typeof(EventName)).Length;
+            Random rnd = new Random();
+            for (int i = 0; i < count; i++)
+            {
+                string name = ((EventName) rnd.Next(types)).ToString();
+                Type type = Significator.ToSignificantType(name);
+                if (type == null)
+                    continue;
+
+                TypedLearningPair pair;
+                if (!learningDict.ContainsKey(type))
+                {
+                    pair = new TypedLearningPair(type, false);
+                    learningDict.Add(type, pair);
+                }
+                else
+                {
+                    pair = learningDict[type];
+                }
+                pair.Modify(Significator.ToSignificant(name));
             }
             return learningDict;
         }

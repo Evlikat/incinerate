@@ -29,7 +29,7 @@ namespace NeuroApplication.Experiments
             foreach (string name in names)
             {
                 //Console.WriteLine(name);
-                ExperimentWatcher experiment = new ExperimentWatcher(writer, 10, name, snapshots);
+                ExperimentWatcher experiment = new ExperimentWatcher(writer, 20, name, snapshots);
                 experiment.Start();
                 resultPrinter.Prefix = name + ",";
                 resultPrinter.PrintResult(experiment.Results);

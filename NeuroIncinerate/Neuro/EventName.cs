@@ -7,7 +7,7 @@ namespace NeuroIncinerate.Neuro
 {
     public enum EventName
     {
-        EventTraceHeader = 0,
+        /*EventTraceHeader = 0,
         EventTraceExtension,
         EventTraceEndExtension,
         EventTraceRundownComplete,
@@ -19,8 +19,8 @@ namespace NeuroIncinerate.Neuro
         ProcessDCEnd,
         ProcessDefunct,
         ProcessPerfCtr,
-        ProcessPerfCtrRundown,
-        ThreadStart,
+        ProcessPerfCtrRundown,*/
+        /*ThreadStart,
         ThreadStartGroup,
         ThreadEnd,
         ThreadEndGroup,
@@ -35,18 +35,18 @@ namespace NeuroIncinerate.Neuro
         ThreadReserveDisjoinThread,
         ThreadReserveState,
         ThreadReserveBandwidth,
-        ThreadReserveLateCount,
+        ThreadReserveLateCount,*/
         DiskIoRead,
         DiskIoWrite,
         DiskIoReadInit,
         DiskIoWriteInit,
         DiskIoFlushInit,
         DiskIoFlushBuffers,
-        DiskIoDriverMajorFunctionCall,
+        /*DiskIoDriverMajorFunctionCall,
         DiskIoDriverMajorFunctionReturn,
         DiskIoDriverCompletionRoutine,
         DiskIoDriverCompleteRequest,
-        DiskIoDriverCompleteRequestReturn,
+        DiskIoDriverCompleteRequestReturn,*/
         RegistryCreate,
         RegistryOpen,
         RegistryDelete,
@@ -66,7 +66,7 @@ namespace NeuroIncinerate.Neuro
         RegistryKCBRundownEnd,
         RegistryVirtualize,
         RegistryClose,
-        SplitIoVolMgr,
+        /*SplitIoVolMgr,*/
         FileIoName,
         FileIoFileCreate,
         FileIoFileDelete,
@@ -111,13 +111,13 @@ namespace NeuroIncinerate.Neuro
         UdpIpFail,
         UdpIpSendIPV6,
         UdpIpRecvIPV6,
-        ImageLoad,
+        /*ImageLoad,
         ImageLoadGroup,
         ImageUnload,
         ImageUnloadGroup,
         ImageDCStart,
-        ImageDCEnd,
-        PageFaultTransitionFault,
+        ImageDCEnd,*/
+        /*PageFaultTransitionFault,
         PageFaultDemandZeroFault,
         PageFaultCopyOnWrite,
         PageFaultGuardPageFault,
@@ -129,7 +129,7 @@ namespace NeuroIncinerate.Neuro
         PageFaultHeapRangeReserve,
         PageFaultHeapRangeRelease,
         PageFaultHeapRangeDestroy,
-        PageFaultImageLoadBacked,
+        PageFaultImageLoadBacked,*/
         PerfInfoSampleProf,
         PerfInfoBatchedSampleProf,
         PerfInfoSetInterval,
@@ -141,8 +141,8 @@ namespace NeuroIncinerate.Neuro
         PerfInfoThreadedDPC,
         PerfInfoDPC,
         PerfInfoTimerDPC,
-        PerfInfoDebuggerEnabled,
-        StackWalk,
+        PerfInfoDebuggerEnabled // ,
+        /*StackWalk,
         ALPCSendMessage,
         ALPCReceiveMessage,
         ALPCWaitForReply,
@@ -163,6 +163,6 @@ namespace NeuroIncinerate.Neuro
         VirtualAlloc,
         VirtualFree,
         ReadyThread,
-        Mark
+        Mark*/
     }
 }

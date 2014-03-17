@@ -4068,6 +4068,7 @@ namespace Diagnostics.Eventing
             sb.XmlAttrib("KeyName", KeyName);
             sb.XmlAttrib("Index", Index);
             sb.XmlAttrib("InitialTime", InitialTime);
+            sb.XmlAttrib("ValueName", ValueName);
             sb.Append("/>");
             return sb;
         }
@@ -4077,7 +4078,7 @@ namespace Diagnostics.Eventing
             get
             {
                 if (payloadNames == null)
-                    payloadNames = new string[] { "Status", "KeyHandle", "ElapsedTime", "KeyName", "Index", "InitialTime" };
+                    payloadNames = new string[] { "Status", "KeyHandle", "ElapsedTime", "KeyName", "Index", "InitialTime", "ValueName" };
                 return payloadNames;
             }
         }
@@ -4098,6 +4099,8 @@ namespace Diagnostics.Eventing
                     return Index;
                 case 5:
                     return InitialTime;
+                case 6:
+                    return ValueName;
                 default:
                     Debug.Assert(false, "Bad field index");
                     return null;
