@@ -25,6 +25,8 @@ namespace NeuroIncinerate.Neuro
 
         AffectedKeys AffectedKeys { get; }
 
+        double Res { get; set; }
+
         string DynamicName { get; set; }
     }
 
@@ -54,6 +56,7 @@ namespace NeuroIncinerate.Neuro
 
         public AffectedKeys AffectedKeys { get; private set; }
         public string DynamicName { get; set; }
+        public double Res { get; set; }
 
         public LimitedProcessHistory(IPID processID, int limit)
         {
@@ -67,6 +70,7 @@ namespace NeuroIncinerate.Neuro
 
             this.AffectedKeys = new AffectedKeys();
             this.DynamicName = "";
+            this.Res = -1;
         }
 
         public void Add(IProcessAction action)

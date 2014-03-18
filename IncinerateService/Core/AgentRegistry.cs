@@ -30,7 +30,7 @@ namespace IncinerateService.Core
             IRecognizedAgent recognized = m_WatchingAgents.Compute(snapshot);
             if (recognized.Apply(iPID.PID))
             {
-                m_History.SetDynamicName(iPID, recognized.Name);
+                m_History.SetDynamicName(iPID, recognized.Name, recognized.MaxRes);
             }
 
             IEnumerable<AgentReaction> reactions = m_GuardianAgents.Compute(snapshot);

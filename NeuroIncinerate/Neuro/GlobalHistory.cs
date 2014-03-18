@@ -71,11 +71,15 @@ namespace NeuroIncinerate.Neuro
             get { return m_History.Keys; }
         }
 
-        public void SetDynamicName(IPID processID, string recognizedAgentName)
+        public void SetDynamicName(IPID processID, string recognizedAgentName, double res)
         {
             if (m_History.ContainsKey(processID))
             {
-                m_History[processID].DynamicName = recognizedAgentName;
+                IProcessHistory history = m_History[processID];
+                if (history.Res < res)
+                {
+                    history.DynamicName = recognizedAgentName;
+                }
             }
         }
     }
