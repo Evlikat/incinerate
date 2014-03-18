@@ -59,7 +59,8 @@ namespace IncinerateService.Core
                     if (res > max)
                     {
                         max = res;
-                        RecognizedAgent newRecognized = new RecognizedAgent(res,
+                        RecognizedAgent newRecognized = new RecognizedAgent(agentSession.Value.AgentName,
+                            res,
                             agentSession.Value.RedStrategy,
                             agentSession.Value.YellowStrategy,
                             agentSession.Value.P1,
@@ -106,10 +107,11 @@ namespace IncinerateService.Core
         IStrategy m_RedStrategy;
         IStrategy m_YellowStrategy;
 
-        public RecognizedAgent(double res,
+        public RecognizedAgent(string name, double res,
             IStrategy redStrategy, IStrategy yellowStrategy,
             double p1, double p2)
         {
+            Name = name;
             m_P1 = p1;
             m_P2 = p2;
             m_Res = res;
@@ -117,7 +119,7 @@ namespace IncinerateService.Core
             m_YellowStrategy = yellowStrategy;
         }
 
-        public void Apply(int pid)
+        public bool Apply(int pid)
         {
             if (m_Res > m_P1)
             {
@@ -129,16 +131,23 @@ namespace IncinerateService.Core
                 {
                     m_YellowStrategy.Apply(m_Res, pid);
                 }
+                return true;
             }
-
+            return false;
         }
 
         public double MaxRes { get; set; }
+
+        public string Name { get; private set; }
     }
 
     class NotRecognizedAgent : IRecognizedAgent
     {
-        public void Apply(int pid) { }
+        public bool Apply(int pid) { return false; }
+        public string Name
+        {
+            get { return ""; }
+        }
 
         public double MaxRes
         {

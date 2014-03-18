@@ -56,6 +56,11 @@ namespace NeuroIncinerate.Neuro
                 SnapshotReady(sender, e);
         }
 
+        public bool ContainsKey(IPID processID)
+        {
+            return m_History.ContainsKey(processID);
+        }
+
         public IProcessHistory this[IPID processID]
         {
             get { return m_History[processID]; }
@@ -64,6 +69,14 @@ namespace NeuroIncinerate.Neuro
         public IEnumerable<IPID> ActivePIDs
         {
             get { return m_History.Keys; }
+        }
+
+        public void SetDynamicName(IPID processID, string recognizedAgentName)
+        {
+            if (m_History.ContainsKey(processID))
+            {
+                m_History[processID].DynamicName = recognizedAgentName;
+            }
         }
     }
 }

@@ -35,5 +35,8 @@ namespace IncinerateService.API
 
         [OperationContract]
         IList<ProcessStatInfo> GetProcessStats();
+
+        [OperationContract]
+        ProcessVerboseStat GetVerboseProcessInfo(int pid);
     }
 }

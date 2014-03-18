@@ -16,13 +16,22 @@ namespace IncinerateService.Core
         ILearningAgentPool m_LearningAgents = new MultiLearningAgentPool();
         IWatchingAgentsPool m_WatchingAgents = new WatchingAgentPool();
         IGuardianAgentsPool m_GuardianAgents = new GuardianAgentsPool();
+        GlobalHistory m_History;
+
+        public AgentRegistry(GlobalHistory history)
+        {
+            this.m_History = history;
+        }
 
         public ICollection<Agent> Handle(IPID iPID, IList<IProcessAction> actions)
         {
             HistorySnapshot snapshot = new HistorySnapshot(iPID, actions);
 
             IRecognizedAgent recognized = m_WatchingAgents.Compute(snapshot);
-            recognized.Apply(iPID.PID);
+            if (recognized.Apply(iPID.PID))
+            {
+                m_History.SetDynamicName(iPID, recognized.Name);
+            }
 
             IEnumerable<AgentReaction> reactions = m_GuardianAgents.Compute(snapshot);
             foreach (AgentReaction reaction in reactions)

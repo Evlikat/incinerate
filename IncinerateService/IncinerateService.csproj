@@ -56,6 +56,7 @@
     <Compile Include="API\AgentInfo.cs" />
     <Compile Include="API\IIncinerateService.cs" />
     <Compile Include="API\ProcessStat.cs" />
+    <Compile Include="API\ProcessVerboseStat.cs" />
     <Compile Include="CommandLineArgs.cs" />
     <Compile Include="Core\Agent.cs" />
     <Compile Include="Core\AgentRegistry.cs" />

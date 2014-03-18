@@ -22,6 +22,10 @@ namespace NeuroIncinerate.Neuro
         int NetActivity { get; }
 
         int RegistryActivity { get; }
+
+        AffectedKeys AffectedKeys { get; }
+
+        string DynamicName { get; set; }
     }
 
     public class SnapshotReadyEventArgs : EventArgs
@@ -48,6 +52,9 @@ namespace NeuroIncinerate.Neuro
         public int NetActivity { get; private set; }
         public int RegistryActivity { get; private set; }
 
+        public AffectedKeys AffectedKeys { get; private set; }
+        public string DynamicName { get; set; }
+
         public LimitedProcessHistory(IPID processID, int limit)
         {
             this.m_ProcessID = processID;
@@ -57,6 +64,9 @@ namespace NeuroIncinerate.Neuro
             this.DiskFileActivity = 0;
             this.NetActivity = 0;
             this.RegistryActivity = 0;
+
+            this.AffectedKeys = new AffectedKeys();
+            this.DynamicName = "";
         }
 
         public void Add(IProcessAction action)
@@ -86,6 +96,7 @@ namespace NeuroIncinerate.Neuro
             {
                 RegistryActivity++;
             }
+            AffectedKeys.UnionWith(action.AffectedKeys);
         }
 
         public IProcessAction this[int index]

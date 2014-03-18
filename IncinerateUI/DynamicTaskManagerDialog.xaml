@@ -24,9 +24,12 @@
                 ItemsSource="{Binding Path=ProcessStats, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" AutoGenerateColumns="False"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
-                MaxHeight="500">
+                MaxHeight="500"
+                MouseDoubleClick="ProcessGrid_MouseDoubleClick">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Name}" Header="Process Name" Width="*">
+                </DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding DynamicName}" Header="Dynamic Name" Width="90">
                 </DataGridTextColumn>
                 <DataGridTextColumn Binding="{Binding PID}" Header="Process ID" Width="75">
                 </DataGridTextColumn>

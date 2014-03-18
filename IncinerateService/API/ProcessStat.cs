@@ -12,6 +12,8 @@ namespace IncinerateService.API
         [DataMember]
         public string Name { get; set; }
         [DataMember]
+        public string DynamicName { get; set; }
+        [DataMember]
         public int PID { get; set; }
         [DataMember]
         public int DiskFileActivity { get; set; }

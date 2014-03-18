@@ -153,7 +153,7 @@ namespace IncinerateUI
         }
     }
 
-    class GetProcessStats : AgentCommand
+    class GetProcessStats : Command
     {
         public GetProcessStats()
         {
@@ -163,6 +163,22 @@ namespace IncinerateUI
         public override CommandResult Execute(IIncinerateService service)
         {
             return new GetStatResult() { ProcessStats = service.GetProcessStats() };
+        }
+    }
+
+    class GetVerboseStat : Command
+    {
+        int m_Pid;
+
+        public GetVerboseStat(int pid)
+        {
+            this.m_Pid = pid;
+            Name = "Get Verbose Process Statistics";
+        }
+
+        public override CommandResult Execute(IIncinerateService service)
+        {
+            return new GetVerboseStatResult() { VerboseStat = service.GetVerboseProcessInfo(m_Pid) };
         }
     }
 }

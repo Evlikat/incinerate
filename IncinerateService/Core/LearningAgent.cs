@@ -12,8 +12,8 @@ namespace IncinerateService.Core
     {
         private static Logger Log = LogManager.GetCurrentClassLogger();
 
-        public const int MinPositiveTrained = 1000;
-        public const int MinNegativeTrained = 2500;
+        public const int MinPositiveTrained = 500;
+        public const int MinNegativeTrained = 1500;
         enum State
         {
             Learning,

@@ -23,8 +23,10 @@ namespace IncinerateService.Core
 
     interface IRecognizedAgent
     {
+        string Name { get; }
+
         double MaxRes { get; }
 
-        void Apply(int pid);
+        bool Apply(int pid);
     }
 }

@@ -1,0 +1,22 @@
+﻿<Window x:Class="IncinerateUI.VerboseProcessInfoDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="VerboseProcessInfoDialog" SizeToContent="WidthAndHeight"
+        WindowStartupLocation="CenterOwner" Loaded="Window_Loaded">
+    <DockPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+        <RichTextBox
+            DockPanel.Dock="Top"
+            Name="StatBox"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            Height="500"
+            Width="Auto"
+            MaxWidth="800"
+            Margin="5"
+            ScrollViewer.VerticalScrollBarVisibility="Auto"
+            >
+            
+        </RichTextBox>
+        <Button DockPanel.Dock="Bottom" Click="OkButton_Click" Content="OK" Margin="5" Height="25"/>
+    </DockPanel>
+</Window>

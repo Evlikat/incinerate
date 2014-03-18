@@ -68,6 +68,24 @@ namespace IncinerateUI
         {
             RefreshList();
         }
+
+        private void ProcessGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            ProcessStat stat = this.ProcessGrid.SelectedItem as ProcessStat;
+            if (stat == null)
+            {
+                return;
+            }
+            GetVerboseStatResult result = m_Client.Execute(new GetVerboseStat(stat.PID)) as GetVerboseStatResult;
+            if (result == null)
+            {
+                MessageBox.Show("Information not found",
+                    "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            VerboseProcessInfoDialog dlg = new VerboseProcessInfoDialog(result.VerboseStat);
+            dlg.ShowDialog();
+        }
     }
 
     internal class DynamicTaskManagerSettings
@@ -81,6 +99,7 @@ namespace IncinerateUI
         public ProcessStat(ProcessStatInfo info)
         {
             this.Name = info.Name;
+            this.DynamicName = info.DynamicName;
             this.PID = info.PID;
             this.DiskFileActivity = info.DiskFileActivity;
             this.NetActivity = info.NetActivity;
@@ -88,6 +107,7 @@ namespace IncinerateUI
         }
 
         public string Name { get; private set; }
+        public string DynamicName { get; private set; }
         public int PID { get; private set; }
         public int DiskFileActivity { get; private set; }
         public int NetActivity { get; private set; }

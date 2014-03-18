@@ -23,4 +23,9 @@ namespace IncinerateUI
     {
         public IList<ProcessStatInfo> ProcessStats { get; set; }
     }
+
+    class GetVerboseStatResult : CommandResult
+    {
+        public ProcessVerboseStat VerboseStat { get; set; }
+    }
 }

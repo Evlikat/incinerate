@@ -34,12 +34,13 @@ namespace IncinerateService.Core
         };
         ProcessEventCollector m_Collector = new ProcessEventCollector();
         GlobalHistory m_History = new GlobalHistory();
-        AgentRegistry m_AgentRegistry = new AgentRegistry();
+        AgentRegistry m_AgentRegistry;
         IAgentStorage m_AgentStorage = new CachedAgentStorage();
         Thread m_ProcessingThread;
 
         public MainService()
         {
+            m_AgentRegistry = new AgentRegistry(m_History);
             Activate();
         }
 
@@ -252,6 +253,7 @@ namespace IncinerateService.Core
                 infos.Add(new ProcessStatInfo()
                 {
                     Name = pid.Name,
+                    DynamicName = history.DynamicName,
                     PID = pid.PID,
                     DiskFileActivity = history.DiskFileActivity,
                     NetActivity = history.NetActivity,
@@ -259,6 +261,18 @@ namespace IncinerateService.Core
                 });
             }
             return infos;
+        }
+
+        public ProcessVerboseStat GetVerboseProcessInfo(int pid)
+        {
+            IPID target = new WinPID(pid, "");
+            if (!m_History.ContainsKey(target))
+            {
+                return null;
+            }
+            IProcessHistory history = m_History[new WinPID(pid, "")];
+            ProcessVerboseStat stat = new ProcessVerboseStat(history.AffectedKeys);
+            return stat;
         }
     }
 }
