@@ -23,7 +23,7 @@ namespace NeuroApplication
             //exr.Run();
             //ExperimentSample exo = new DifferentProcessesExperiment(@"c:\etlo", @"c:\reso.txt");
             //exo.Run();
-            EnvironmentExperiment envEx = new EnvironmentExperiment(@"c:\etlo", @"c:\res\all.csv");
+            EnvironmentExperiment envEx = new EnvironmentExperiment(@"c:\etl\etle", @"c:\res\all.csv");
             envEx.Run();
             //SnapshotLengthExperiment snExp = new SnapshotLengthExperiment("ekrn", @"c:\etlo", @"c:\res\ekrn.csv");
             //snExp.Run();

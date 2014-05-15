@@ -49,8 +49,8 @@ namespace NeuroIncinerate.Neuro.Multi
             EventTypeDict.Add("DiskIoWrite", new EnumInfo(typeof(SignificantDiskIoEvent), SignificantDiskIoEvent.DiskIoWrite.ToString()));
             EventTypeDict.Add("DiskIoReadInit", new EnumInfo(typeof(SignificantDiskIoEvent), SignificantDiskIoEvent.DiskIoRead.ToString()));
             EventTypeDict.Add("DiskIoWriteInit", new EnumInfo(typeof(SignificantDiskIoEvent), SignificantDiskIoEvent.DiskIoWrite.ToString()));
-            EventTypeDict.Add("DiskIoFlushInit", new EnumInfo(typeof(SignificantDiskIoEvent), SignificantDiskIoEvent.DiskIoWrite.ToString()));
-            EventTypeDict.Add("DiskIoFlushBuffers", new EnumInfo(typeof(SignificantDiskIoEvent), SignificantDiskIoEvent.DiskIoWrite.ToString()));
+            EventTypeDict.Add("DiskIoFlushInit", new EnumInfo(typeof(SignificantDiskIoEvent), SignificantDiskIoEvent.DiskIoFlush.ToString()));
+            EventTypeDict.Add("DiskIoFlushBuffers", new EnumInfo(typeof(SignificantDiskIoEvent), SignificantDiskIoEvent.DiskIoFlush.ToString()));
             EventTypeDict.Add("DiskIoDriverMajorFunctionCall", new EnumInfo(typeof(SignificantDiskIoEvent), SignificantDiskIoEvent.DiskIoNonSignificant.ToString()));
             EventTypeDict.Add("DiskIoDriverMajorFunctionReturn", new EnumInfo(typeof(SignificantDiskIoEvent), SignificantDiskIoEvent.DiskIoNonSignificant.ToString()));
             EventTypeDict.Add("DiskIoDriverCompletionRoutine", new EnumInfo(typeof(SignificantDiskIoEvent), SignificantDiskIoEvent.DiskIoNonSignificant.ToString()));
@@ -58,14 +58,14 @@ namespace NeuroIncinerate.Neuro.Multi
             EventTypeDict.Add("DiskIoDriverCompleteRequestReturn", new EnumInfo(typeof(SignificantDiskIoEvent), SignificantDiskIoEvent.DiskIoNonSignificant.ToString()));
 
             EventTypeDict.Add("RegistryCreate", new EnumInfo(typeof(SignificantRegistryEvent), SignificantRegistryEvent.RegCreate.ToString()));
-            EventTypeDict.Add("RegistryOpen", new EnumInfo(typeof(SignificantRegistryEvent), SignificantRegistryEvent.RegRead.ToString()));
+            EventTypeDict.Add("RegistryOpen", new EnumInfo(typeof(SignificantRegistryEvent), SignificantRegistryEvent.RegOpen.ToString()));
             EventTypeDict.Add("RegistryDelete", new EnumInfo(typeof(SignificantRegistryEvent), SignificantRegistryEvent.RegModify.ToString()));
             EventTypeDict.Add("RegistryQuery", new EnumInfo(typeof(SignificantRegistryEvent), SignificantRegistryEvent.RegRead.ToString()));
             EventTypeDict.Add("RegistrySetValue", new EnumInfo(typeof(SignificantRegistryEvent), SignificantRegistryEvent.RegModify.ToString()));
             EventTypeDict.Add("RegistryDeleteValue", new EnumInfo(typeof(SignificantRegistryEvent), SignificantRegistryEvent.RegModify.ToString()));
             EventTypeDict.Add("RegistryQueryValue", new EnumInfo(typeof(SignificantRegistryEvent), SignificantRegistryEvent.RegRead.ToString()));
-            EventTypeDict.Add("RegistryEnumerateKey", new EnumInfo(typeof(SignificantRegistryEvent), SignificantRegistryEvent.RegRead.ToString()));
-            EventTypeDict.Add("RegistryEnumerateValueKey", new EnumInfo(typeof(SignificantRegistryEvent), SignificantRegistryEvent.RegRead.ToString()));
+            EventTypeDict.Add("RegistryEnumerateKey", new EnumInfo(typeof(SignificantRegistryEvent), SignificantRegistryEvent.RegEnumerate.ToString()));
+            EventTypeDict.Add("RegistryEnumerateValueKey", new EnumInfo(typeof(SignificantRegistryEvent), SignificantRegistryEvent.RegEnumerate.ToString()));
             EventTypeDict.Add("RegistryQueryMultipleValue", new EnumInfo(typeof(SignificantRegistryEvent), SignificantRegistryEvent.RegRead.ToString()));
             EventTypeDict.Add("RegistrySetInformation", new EnumInfo(typeof(SignificantRegistryEvent), SignificantRegistryEvent.RegModify.ToString()));
             EventTypeDict.Add("RegistryFlush", new EnumInfo(typeof(SignificantRegistryEvent), SignificantRegistryEvent.RegModify.ToString()));

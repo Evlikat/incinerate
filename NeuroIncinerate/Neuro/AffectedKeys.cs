@@ -67,12 +67,15 @@ namespace NeuroIncinerate.Neuro
 
         public void UnionWith(AffectedKeys keys)
         {
-            AffectedDestinationPorts.UnionWith(keys.AffectedDestinationPorts);
-            AffectedSourcePorts.UnionWith(keys.AffectedSourcePorts);
-            AffectedDestinationAddresses.UnionWith(keys.AffectedDestinationAddresses);
-            AffectedSourceAddresses.UnionWith(keys.AffectedSourceAddresses);
-            AffectedRegKeys.UnionWith(keys.AffectedRegKeys);
-            AffectedRegValues.UnionWith(keys.AffectedRegValues);
+            if (keys != null)
+            {
+                AffectedDestinationPorts.UnionWith(keys.AffectedDestinationPorts);
+                AffectedSourcePorts.UnionWith(keys.AffectedSourcePorts);
+                AffectedDestinationAddresses.UnionWith(keys.AffectedDestinationAddresses);
+                AffectedSourceAddresses.UnionWith(keys.AffectedSourceAddresses);
+                AffectedRegKeys.UnionWith(keys.AffectedRegKeys);
+                AffectedRegValues.UnionWith(keys.AffectedRegValues);
+            }
         }
 
         public override string ToString()

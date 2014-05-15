@@ -18,12 +18,15 @@ namespace NeuroIncinerate.Neuro.Multi
     {
         DiskIoRead = 0,
         DiskIoWrite,
+        DiskIoFlush,
         DiskIoNonSignificant
     }
 
     public enum SignificantRegistryEvent : int
     {
         RegCreate = 0,
+        RegOpen,
+        RegEnumerate,
         RegRead,
         RegModify,
         RegNonSignificant

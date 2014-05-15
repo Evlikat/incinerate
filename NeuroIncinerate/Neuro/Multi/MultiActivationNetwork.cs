@@ -59,11 +59,11 @@ namespace NeuroIncinerate.Neuro.Multi
             }
             else
             {
-                learningDict = GetNegativePairs(snapshot);
+                learningDict = GetPositivePairs(snapshot);
             }
             foreach (KeyValuePair<Type, TypedLearningPair> typePairPair in learningDict)
             {
-                TrainerMap[typePairPair.Key].Run(typePairPair.Value.Input, typePairPair.Value.Output);
+                TrainerMap[typePairPair.Key].Run(Normalize(typePairPair.Value.Input), typePairPair.Value.Output);
             }
         }
 
@@ -75,10 +75,27 @@ namespace NeuroIncinerate.Neuro.Multi
             {
                 NetworkComputationResultEntry resultEntry =
                     new NetworkComputationResultEntry(
-                        NetworkMap[typePairPair.Key].Compute(typePairPair.Value.Values), typePairPair.Key.Name);
+                        NetworkMap[typePairPair.Key].Compute(Normalize(typePairPair.Value.Values)), typePairPair.Key.Name);
                 results.Add(resultEntry);
             }
             return new MultiNetworkComputationResult(results, TrustVector);
+        }
+
+        private double[] Normalize(double[] input)
+        {
+            //return input;
+            double[] normalizedInput = new double[input.Length];
+            double sum = 0.0;
+            foreach (double d in input)
+            {
+                sum += d * d;
+            }
+            double vectorLen = Math.Sqrt(sum);
+            for (int i = 0; i < input.Length; i++)
+            {
+                normalizedInput[i] = input[i] / vectorLen;
+            }
+            return normalizedInput;
         }
 
         private IDictionary<Type, TypedLearningPair> GetPositivePairs(HistorySnapshot snapshot)
@@ -105,7 +122,7 @@ namespace NeuroIncinerate.Neuro.Multi
             return learningDict;
         }
 
-        private IDictionary<Type, TypedLearningPair> GetNegativePairs(HistorySnapshot snapshot)
+        private IDictionary<Type, TypedLearningPair> GetRandomNegativePairs(HistorySnapshot snapshot)
         {
             IDictionary<Type, TypedLearningPair> learningDict = new Dictionary<Type, TypedLearningPair>();
             int count = snapshot.Events.Count;
