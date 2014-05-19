@@ -136,7 +136,8 @@ namespace NeuroApplication
 
         public static bool WasSuccessed(IMultiNetworkComputationResult result, bool expectedYes)
         {
-            return (result.Result[0] - result.Result[1] > 0.0) ^ !expectedYes;
+            bool right = (result.Result[0] - result.Result[1] > 0.1) ^ !expectedYes;
+            return right;
         }
     }
 }

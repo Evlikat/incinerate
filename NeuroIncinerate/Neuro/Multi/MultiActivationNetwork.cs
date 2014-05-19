@@ -4,12 +4,14 @@ using System.Linq;
 using System.Text;
 using AForge.Neuro;
 using AForge.Neuro.Learning;
+using NLog;
 
 namespace NeuroIncinerate.Neuro.Multi
 {
     [Serializable]
     public class MultiActivationNetwork
     {
+        private static Logger Log = LogManager.GetCurrentClassLogger();
         [NonSerialized]
         private IDictionary<Type, BackPropagationLearning> m_TrainerMap;
 
@@ -51,6 +53,7 @@ namespace NeuroIncinerate.Neuro.Multi
 
         public void RunTrain(HistorySnapshot snapshot, bool isTargetProcess)
         {
+            Log.Info((isTargetProcess ? "Target: " : "Non-target: ") + snapshot.ToString());
             IDictionary<Type, TypedLearningPair> learningDict;
             if (isTargetProcess)
             {
@@ -59,7 +62,7 @@ namespace NeuroIncinerate.Neuro.Multi
             }
             else
             {
-                learningDict = GetPositivePairs(snapshot);
+                learningDict = GetRandomNegativePairs(snapshot);
             }
             foreach (KeyValuePair<Type, TypedLearningPair> typePairPair in learningDict)
             {

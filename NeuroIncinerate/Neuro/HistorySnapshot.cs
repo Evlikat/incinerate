@@ -82,5 +82,22 @@ namespace NeuroIncinerate.Neuro
                 yield return sourceSnapshot.Sub(i * snapshotLength, (i + 1) * snapshotLength);
             }
         }
+
+        public override string ToString()
+        {            
+            IDictionary<String, int> counter = new Dictionary<String, int>();
+            foreach (IProcessAction action in Events)
+            {
+                if (counter.ContainsKey(action.EventName))
+                {
+                    counter[action.EventName]++;
+                }
+                else
+                {
+                    counter.Add(action.EventName, 1);
+                }
+            }
+            return String.Join(",", counter.Select(item => item.Key + "=" + item.Value));
+        }
     }
 }

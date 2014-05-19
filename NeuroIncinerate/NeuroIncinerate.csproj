@@ -36,6 +36,9 @@
     <Reference Include="AForge.Neuro">
       <HintPath>..\bin\AForge.Neuro.dll</HintPath>
     </Reference>
+    <Reference Include="NLog">
+      <HintPath>..\bin\NLog.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
