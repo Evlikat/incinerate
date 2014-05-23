@@ -49,14 +49,14 @@ namespace IncinerateService.Core
 
         public IRecognizedAgent Compute(HistorySnapshot snapshot)
         {
-            double max = -1.0;
+            double max = 0;
             IRecognizedAgent recognized = new NotRecognizedAgent();
             lock (syncRoot)
             {
                 foreach (KeyValuePair<Agent, WatchingAgentSession> agentSession in m_Agents)
                 {
                     double res = agentSession.Key.Compute(snapshot);
-                    if (res > max)
+                    if (res > max - agentSession.Value.P1)
                     {
                         max = res;
                         RecognizedAgent newRecognized = new RecognizedAgent(agentSession.Value.AgentName,

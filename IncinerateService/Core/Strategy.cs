@@ -54,7 +54,7 @@ namespace IncinerateService.Core
     class HitTerminateStrategy : AbstractStrategy
     {
         object m_Sync = new object();
-        int hits = 0;
+        IDictionary<int, int> pidHits = new Dictionary<int, int>();
         int m_MaxHits;
 
         public HitTerminateStrategy(int max, Logger log) : base(log)
@@ -70,7 +70,17 @@ namespace IncinerateService.Core
         {
             lock (m_Sync)
             {
-                hits++;
+                int hits;
+                if (!pidHits.ContainsKey(pid))
+                {
+                    pidHits.Add(pid, 1);
+                    hits = 1;
+                }
+                else
+                {
+                    pidHits[pid]++;
+                    hits = pidHits[pid];
+                }
                 Log.Warn("Обнаружен запрещенный процесс {0} [{1:0.000000}]. hits: {2}", pid, res, hits);
                 if (hits >= m_MaxHits)
                 {
