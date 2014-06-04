@@ -5,11 +5,14 @@ using System.Text;
 using System.IO;
 using NeuroIncinerate.Neuro.Multi;
 using NeuroIncinerate.Neuro;
+using NLog;
 
 namespace NeuroApplication
 {
     class Experiment
     {
+        private static Logger Log = LogManager.GetCurrentClassLogger();
+
         public event EventHandler LoadingStarted;
         public event EventHandler LoadingFinished;
         public event EventHandler TrainingStarted;
@@ -49,6 +52,7 @@ namespace NeuroApplication
             TrainLearningSet(multiNetwork, learningSet.Learning);
             INetworkTrustRegistry trustRegistry = CheckLearningSet(multiNetwork, learningSet.Checking);
             multiNetwork.TrustVector = trustRegistry;
+            Log.Info("Applied trust vector: " + trustRegistry.ToString());
             TrainLearningSet(multiNetwork, learningSet.Checking);
             CheckLearningSet(multiNetwork, learningSet.Testing);
         }
@@ -57,6 +61,7 @@ namespace NeuroApplication
         {
             int i = 0;
             TrainingStarted(this, new EventArgs());
+            //learningSet = RemoveDuplicates(learningSet);
             learningSet = Shuffle(learningSet);
             foreach (HistorySnapshot snapshot in learningSet)
             {
@@ -111,6 +116,32 @@ namespace NeuroApplication
         private IList<HistorySnapshot> Shuffle(IList<HistorySnapshot> snapshots)
         {
             return new List<HistorySnapshot>(snapshots.OrderBy(a => Guid.NewGuid()));
+        }
+
+        private IList<HistorySnapshot> RemoveDuplicates(IList<HistorySnapshot> snapshots)
+        {
+            IList<HistorySnapshot> result = new List<HistorySnapshot>();
+            foreach (HistorySnapshot ss in snapshots)
+            {
+                bool duplicate = false;
+                foreach (HistorySnapshot other in snapshots)
+                {
+                    if (ss == other)
+                    {
+                        continue;
+                    }
+                    if (ss.Duplicates(other) && !other.LegacyProcessName.Equals(ss.LegacyProcessName))
+                    {
+                        duplicate = true;
+                        break;
+                    }
+                }
+                if (!duplicate)
+                {
+                    result.Add(ss);
+                }
+            }
+            return result;
         }
     }
 }

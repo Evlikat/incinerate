@@ -21,6 +21,34 @@ namespace NeuroApplication
 
         public void PrintResult(IList<ComputationFinishedEventArgs> results)
         {
+            int yes = 0;
+            double yesSum = 0.0;
+            int no = 0;
+            double noSum = 0.0;
+            foreach (ComputationFinishedEventArgs e in results)
+            {
+                foreach (KeyValuePair<IMultiNetworkComputationResult, bool> resultPair in e.Results)
+                {
+                    double res = resultPair.Key.Result[0] - resultPair.Key.Result[1];
+                    if (resultPair.Value)
+                    {
+                        yes++;
+                        yesSum += res;
+                    }
+                    else
+                    {
+                        no++;
+                        noSum += res;
+                    }
+                }
+            }
+            double yesAvg = yesSum / yes;
+            double noAvg = noSum / no;
+
+            double part = (double) no / (yes + no);
+            double threshold = (part * yesAvg + (1.0 - part) * noAvg);
+            double threshold2 = ((no * yesSum) / (yes * (no + yes))) + ((yes * noSum) / (no * (no + yes)));
+
             foreach (ComputationFinishedEventArgs e in results)
             {
                 int successYes = 0;
@@ -38,7 +66,7 @@ namespace NeuroApplication
                     {
                         resYes.Add(resultPair.Key.Result[0] - resultPair.Key.Result[1]);
                         expectedYes++;
-                        if (ExperimentWatcher.WasSuccessed(resultPair.Key, resultPair.Value))
+                        if (ExperimentWatcher.WasSuccessed(resultPair.Key, threshold, resultPair.Value))
                         {
                             successYes++;
                         }
@@ -51,7 +79,7 @@ namespace NeuroApplication
                     {
                         resNo.Add(resultPair.Key.Result[0] - resultPair.Key.Result[1]);
                         expectedNo++;
-                        if (ExperimentWatcher.WasSuccessed(resultPair.Key, resultPair.Value))
+                        if (ExperimentWatcher.WasSuccessed(resultPair.Key, threshold, resultPair.Value))
                         {
                             successNo++;
                         }
@@ -64,12 +92,11 @@ namespace NeuroApplication
                 }
                 int successCount = successNo + successYes;
                 string res = String.Format(
-                    Prefix + "{0} of {1}({9} + {10}). Eff = {2:0.00}%. Errors {3} ({4:0.00}%) = {5}({6:0.00}%) + {7}({8:0.00}%)",
+                    Prefix + "{0} of {1}({7} + {8}). Eff = {2:0.00}%. Errors {3} ({4:0.00}%) = {5} + {6}, [th={9:0.0000}, yes={10:0.0000}, no={11:0.0000}]",
                     successCount, total, (double)successCount / total * 100,
                     wrongYes + wrongNo, (double)(wrongYes + wrongNo) / total * 100,
-                    wrongNo, (double)wrongNo / expectedNo * 100,
-                    wrongYes, (double)wrongYes / expectedYes * 100,
-                    expectedNo, expectedYes
+                    wrongNo, wrongYes, expectedNo, expectedYes,
+                    threshold, yesAvg, noAvg
                     );
                 console.WriteLine(res);
                 string resTable = String.Format(

@@ -11,11 +11,13 @@ namespace NeuroApplication.Experiments
     {
         string source;
         string results;
+        ISet<string> targetNames;
 
-        public EnvironmentExperiment(string source, string results)
+        public EnvironmentExperiment(string source, string results, ISet<string> targetNames)
         {
             this.source = source;
             this.results = results;
+            this.targetNames = targetNames;
         }
 
         public override void Run()
@@ -28,6 +30,10 @@ namespace NeuroApplication.Experiments
 
             foreach (string name in names)
             {
+                if (targetNames.Count != 0 && !targetNames.Contains(name))
+                {
+                    continue;
+                }
                 //Console.WriteLine(name);
                 ExperimentWatcher experiment = new ExperimentWatcher(writer, 20, name, snapshots);
                 experiment.Start();

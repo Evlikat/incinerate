@@ -83,8 +83,20 @@ namespace NeuroIncinerate.Neuro
             }
         }
 
+        public bool Duplicates(HistorySnapshot other)
+        {
+            IDictionary<String, int> thisCounter = this.Counter();
+            IDictionary<String, int> otherCounter = other.Counter();
+            return thisCounter.OrderBy(r => r.Key).SequenceEqual(otherCounter.OrderBy(r => r.Key));
+        }
+
         public override string ToString()
         {            
+            return String.Join(",", Counter().Select(item => item.Key + "=" + item.Value));
+        }
+
+        protected IDictionary<String, int> Counter()
+        {
             IDictionary<String, int> counter = new Dictionary<String, int>();
             foreach (IProcessAction action in Events)
             {
@@ -97,7 +109,7 @@ namespace NeuroIncinerate.Neuro
                     counter.Add(action.EventName, 1);
                 }
             }
-            return String.Join(",", counter.Select(item => item.Key + "=" + item.Value));
+            return counter;
         }
     }
 }

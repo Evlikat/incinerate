@@ -39,7 +39,7 @@ namespace NeuroApplication
         }
 
         public void PrintResult()
-        {
+        {            
             foreach (ComputationFinishedEventArgs e in m_Results)
             {
                 int successYes = 0;
@@ -51,7 +51,7 @@ namespace NeuroApplication
                 {
                     if (resultPair.Value)
                     {
-                        if (WasSuccessed(resultPair.Key, resultPair.Value))
+                        if (WasSuccessed(resultPair.Key, 0, resultPair.Value))
                         {
                             successYes++;
                         }
@@ -62,7 +62,7 @@ namespace NeuroApplication
                     }
                     else
                     {
-                        if (WasSuccessed(resultPair.Key, resultPair.Value))
+                        if (WasSuccessed(resultPair.Key, 0, resultPair.Value))
                         {
                             successNo++;
                         }
@@ -134,9 +134,9 @@ namespace NeuroApplication
             Writer.WriteLine("Computing...");
         }
 
-        public static bool WasSuccessed(IMultiNetworkComputationResult result, bool expectedYes)
+        public static bool WasSuccessed(IMultiNetworkComputationResult result, double threshold, bool expectedYes)
         {
-            bool right = (result.Result[0] - result.Result[1] > 0.1) ^ !expectedYes;
+            bool right = (result.Result[0] - result.Result[1] > threshold) ^ !expectedYes;
             return right;
         }
     }

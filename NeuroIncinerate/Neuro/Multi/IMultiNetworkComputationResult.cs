@@ -127,6 +127,11 @@ namespace NeuroIncinerate.Neuro.Multi
                 return sum;
             }
         }
+
+        public override string ToString()
+        {
+            return "[" + String.Join(", ", trustLevelDict.Select(level => (level.Key + "=" + level.Value.Level))) + "]";
+        }
     }
 
     [Serializable]

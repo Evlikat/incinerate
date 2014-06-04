@@ -57,11 +57,13 @@ namespace NeuroIncinerate.Neuro.Multi
             IDictionary<Type, TypedLearningPair> learningDict;
             if (isTargetProcess)
             {
-                learningDict = GetPositivePairs(snapshot);
+                learningDict = GetPairs(snapshot, true);
                 LearnedAffectedKeys.UnionWith(snapshot.AffectedKeys);
             }
             else
             {
+                //learningDict = new Dictionary<Type, TypedLearningPair>();
+                //learningDict = GetPairs(snapshot, false);
                 learningDict = GetRandomNegativePairs(snapshot);
             }
             foreach (KeyValuePair<Type, TypedLearningPair> typePairPair in learningDict)
@@ -78,7 +80,12 @@ namespace NeuroIncinerate.Neuro.Multi
             {
                 NetworkComputationResultEntry resultEntry =
                     new NetworkComputationResultEntry(
-                        NetworkMap[typePairPair.Key].Compute(Normalize(typePairPair.Value.Values)), typePairPair.Key.Name);
+                        NetworkMap[typePairPair.Key].Compute(
+                            Normalize(
+                                typePairPair.Value.Values
+                                )
+                            ),
+                            typePairPair.Key.Name);
                 results.Add(resultEntry);
             }
             return new MultiNetworkComputationResult(results, TrustVector);
@@ -86,7 +93,6 @@ namespace NeuroIncinerate.Neuro.Multi
 
         private double[] Normalize(double[] input)
         {
-            //return input;
             double[] normalizedInput = new double[input.Length];
             double sum = 0.0;
             foreach (double d in input)
@@ -101,7 +107,7 @@ namespace NeuroIncinerate.Neuro.Multi
             return normalizedInput;
         }
 
-        private IDictionary<Type, TypedLearningPair> GetPositivePairs(HistorySnapshot snapshot)
+        private IDictionary<Type, TypedLearningPair> GetPairs(HistorySnapshot snapshot, bool isTarget)
         {
             IDictionary<Type, TypedLearningPair> learningDict = new Dictionary<Type, TypedLearningPair>();
             foreach (IProcessAction action in snapshot.Events)
@@ -113,7 +119,7 @@ namespace NeuroIncinerate.Neuro.Multi
                 TypedLearningPair pair;
                 if (!learningDict.ContainsKey(type))
                 {
-                    pair = new TypedLearningPair(type, true);
+                    pair = new TypedLearningPair(type, isTarget);
                     learningDict.Add(type, pair);
                 }
                 else
